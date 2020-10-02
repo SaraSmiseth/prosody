@@ -1,4 +1,4 @@
-function splitString (input, sep)
+local splitString = function(input, sep)
     local t={}
     for str in string.gmatch(input, "([^"..sep.."]+)") do
             table.insert(t, str)
