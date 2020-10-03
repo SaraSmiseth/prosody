@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-* Nothing
+* Fixed using list ENV variables with multiple values
 
 ## v1.1.2
 

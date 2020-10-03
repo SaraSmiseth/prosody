@@ -49,6 +49,7 @@ RUN buildDeps='gcc git libc6-dev libidn11-dev liblua5.2-dev libsqlite3-dev libss
  && luarocks install luaevent \
  && luarocks install luadbi \
  && luarocks install luadbi-sqlite3 \
+ && luarocks install stringy \
  \
  && apt-get purge -y --auto-remove $buildDeps
 
@@ -57,6 +58,9 @@ EXPOSE 5000 5222 5223 5269 5347 5280 5281
 RUN groupadd -r prosody \
  && useradd -r -g prosody prosody \
  && chown prosody:prosody /usr/local/var/lib/prosody
+
+RUN mkdir -p /var/run/prosody/ \
+ && chown prosody:prosody /var/run/prosody/
 
 # https://github.com/prosody/prosody-docker/issues/25
 ENV __FLUSH_LOG yes
