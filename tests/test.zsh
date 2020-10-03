@@ -11,8 +11,16 @@ generateCert() {
     cd ../../
 }
 
-generateCert "prosody"
-generateCert "conference.prosody"
-generateCert "pubsub.prosody"
-generateCert "proxy.prosody"
-generateCert "upload.prosody"
+generateCert "localhost"
+generateCert "conference.localhost"
+generateCert "pubsub.localhost"
+generateCert "proxy.localhost"
+generateCert "upload.localhost"
+
+sudo docker-compose up -d
+
+sudo docker exec tests_prosody_1 /bin/bash -c "/entrypoint.sh register admin localhost 12345678"
+
+python test.py
+
+sudo docker-compose down

@@ -11,13 +11,16 @@ services:
       - "5269:5269"
       - "5281:5281"
     environment:
-      DOMAIN: prosody
-      PROSODY_ADMINS: "admin@prosody, admin2@prosody"
+      DOMAIN: localhost
+      E2E_POLICY_CHAT: optional
+      E2E_POLICY_MUC: optional
+      LOG_LEVEL: debug
+      PROSODY_ADMINS: "admin@localhost, admin2@localhost"
     extra_hosts:
-      - "conference.prosody:127.0.0.1"
-      - "pubsub.prosody:127.0.0.1"
-      - "proxy.prosody:127.0.0.1"
-      - "upload.prosody:127.0.0.1"
+      - "conference.localhost:127.0.0.1"
+      - "pubsub.localhost:127.0.0.1"
+      - "proxy.localhost:127.0.0.1"
+      - "upload.localhost:127.0.0.1"
     volumes:
       - ./certs:/usr/local/etc/prosody/certs
         #- ./data:/usr/local/var/lib/prosody
