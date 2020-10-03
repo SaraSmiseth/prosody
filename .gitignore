@@ -1,3 +1,4 @@
 data/*
 tests/certs/
 tests/venv/
+tests/__pycache__/

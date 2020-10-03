@@ -4,11 +4,13 @@
 
 generateCert() {
     DOMAIN="$1"
-    mkdir -p certs/"$DOMAIN"
-    cd certs/"$DOMAIN"
-    openssl req -x509 -newkey rsa:4096 -keyout privkey.pem -out fullchain.pem -days 365 -subj "/CN=$DOMAIN" -nodes
-    chmod 777 *.pem
-    cd ../../
+    if [[ ! -d certs/"$DOMAIN" ]] ; then
+        mkdir -p certs/"$DOMAIN"
+        cd certs/"$DOMAIN"
+        openssl req -x509 -newkey rsa:4096 -keyout privkey.pem -out fullchain.pem -days 365 -subj "/CN=$DOMAIN" -nodes
+        chmod 777 *.pem
+        cd ../../
+    fi
 }
 
 generateCert "localhost"
@@ -21,6 +23,10 @@ sudo docker-compose up -d
 
 sudo docker exec tests_prosody_1 /bin/bash -c "/entrypoint.sh register admin localhost 12345678"
 
-python test.py
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+pytest
+deactivate
 
 sudo docker-compose down
