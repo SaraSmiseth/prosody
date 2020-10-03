@@ -50,11 +50,3 @@ async def test_sendMessage(client_with_messageDispatcher):
         msg.body[None] = "Hello World!"
 
         await client.send(msg)
-
-# def main():
-#     loop = asyncio.get_event_loop()
-#     loop.run_until_complete(sendMessage())
-#     loop.close()
-
-# if __name__ == '__main__':
-#     main()

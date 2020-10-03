@@ -25,7 +25,7 @@ sudo docker exec tests_prosody_1 /bin/bash -c "/entrypoint.sh register admin loc
 
 python -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements.txt # If updates are available --> update and create new version with 'pip-chill > requirements.txt'
 pytest
 deactivate
 
