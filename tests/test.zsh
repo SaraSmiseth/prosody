@@ -19,14 +19,24 @@ generateCert "pubsub.localhost"
 generateCert "proxy.localhost"
 generateCert "upload.localhost"
 
-sudo docker-compose up -d
+ # If updates are available --> update and create new version with 'pip-chill > requirements.txt'
 
-sudo docker exec tests_prosody_1 /bin/bash -c "/entrypoint.sh register admin localhost 12345678"
+sudo docker-compose down \
+&& sudo docker-compose up -d \
+\
+&& sudo docker exec tests_prosody_1 /bin/bash -c "/entrypoint.sh register admin localhost 12345678" \
+&& sudo docker exec tests_prosody_1 /bin/bash -c "/entrypoint.sh register user localhost 12345678" \
+&& sudo docker exec tests_prosody_1 /bin/bash -c "/entrypoint.sh register user2 localhost 12345678" \
+\
+&& python -m venv venv \
+&& source venv/bin/activate \
+&& pip install -r requirements.txt \
+&& pytest \
+&& deactivate \
+&& sleep 1 \
+&& sudo docker-compose logs | grep "message to" \
+&& sudo docker-compose logs | grep "type='error'"
 
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt # If updates are available --> update and create new version with 'pip-chill > requirements.txt'
-pytest
-deactivate
+# TODO Call bats and create tests to check log output
 
 sudo docker-compose down

@@ -4,9 +4,9 @@ import asyncio
 import pytest
 
 @pytest.fixture
-def client():
+def client(client_username):
 
-    jid = aioxmpp.JID.fromstr("admin@localhost")
+    jid = aioxmpp.JID.fromstr(client_username)
     password = "12345678"
 
     client = aioxmpp.PresenceManagedClient(
@@ -19,10 +19,11 @@ def client():
     return client
 
 @pytest.fixture
-def client_with_messageDispatcher(client):
+def client_with_message_dispatcher(client):
     def message_received(msg):
         print(msg)
         print(msg.body)
+        assert msg.body == "Hello World!"
 
     # obtain an instance of the service
     message_dispatcher = client.summon(
@@ -38,9 +39,37 @@ def client_with_messageDispatcher(client):
     return client
 
 @pytest.mark.asyncio
-async def test_sendMessage(client_with_messageDispatcher):
-    client = client_with_messageDispatcher
-    recipient_jid = aioxmpp.JID.fromstr("admin@localhost")
+@pytest.mark.parametrize("client_username", ["admin@localhost"])
+async def test_send_message_from_admin_to_user(client):
+    recipient_jid = aioxmpp.JID.fromstr("user@localhost")
+    async with client.connected() as stream:
+        msg = aioxmpp.Message(
+            to=recipient_jid,
+            type_=aioxmpp.MessageType.CHAT,
+        )
+        # None is for "default language"
+        msg.body[None] = "Hello World!"
+
+        await client.send(msg)
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("client_username", ["admin@localhost"])
+async def test_send_message_from_admin_to_user2(client):
+    recipient_jid = aioxmpp.JID.fromstr("user2@localhost")
+    async with client.connected() as stream:
+        msg = aioxmpp.Message(
+            to=recipient_jid,
+            type_=aioxmpp.MessageType.CHAT,
+        )
+        # None is for "default language"
+        msg.body[None] = "Hello World!"
+
+        await client.send(msg)
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("client_username", ["user@localhost"])
+async def test_send_message_from_user_to_user2(client):
+    recipient_jid = aioxmpp.JID.fromstr("user2@localhost")
     async with client.connected() as stream:
         msg = aioxmpp.Message(
             to=recipient_jid,

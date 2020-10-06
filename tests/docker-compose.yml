@@ -12,8 +12,9 @@ services:
       - "5281:5281"
     environment:
       DOMAIN: localhost
-      E2E_POLICY_CHAT: optional
-      E2E_POLICY_MUC: optional
+      #E2E_POLICY_CHAT: optional
+      #E2E_POLICY_MUC: optional
+      E2E_POLICY_WHITELIST: "admin@localhost"
       LOG_LEVEL: debug
       PROSODY_ADMINS: "admin@localhost, admin2@localhost"
     extra_hosts:
