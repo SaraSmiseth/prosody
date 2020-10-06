@@ -35,12 +35,11 @@ sudo docker-compose down \
 && pytest \
 && deactivate \
 && sleep 1 \
-&& sudo docker-compose logs | grep "message to" \
-&& sudo docker-compose logs | grep "type='error'"
+&& ./bats/bats-core/bin/bats tests.bats
 
+#&& sudo docker-compose logs | grep "message to" \
+#&& sudo docker-compose logs | grep "type='error'"
 # Received[c2s]: <message to='*@localhost' * type='chat'>
 # Should be five times in log
-
-# TODO Call bats and create tests to check log output
 
 sudo docker-compose down
