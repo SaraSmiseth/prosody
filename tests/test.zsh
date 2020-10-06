@@ -25,8 +25,9 @@ sudo docker-compose down \
 && sudo docker-compose up -d \
 \
 && sudo docker exec tests_prosody_1 /bin/bash -c "/entrypoint.sh register admin localhost 12345678" \
-&& sudo docker exec tests_prosody_1 /bin/bash -c "/entrypoint.sh register user localhost 12345678" \
+&& sudo docker exec tests_prosody_1 /bin/bash -c "/entrypoint.sh register user1 localhost 12345678" \
 && sudo docker exec tests_prosody_1 /bin/bash -c "/entrypoint.sh register user2 localhost 12345678" \
+&& sudo docker exec tests_prosody_1 /bin/bash -c "/entrypoint.sh register user3 localhost 12345678" \
 \
 && python -m venv venv \
 && source venv/bin/activate \
@@ -36,6 +37,9 @@ sudo docker-compose down \
 && sleep 1 \
 && sudo docker-compose logs | grep "message to" \
 && sudo docker-compose logs | grep "type='error'"
+
+# Received[c2s]: <message to='*@localhost' * type='chat'>
+# Should be five times in log
 
 # TODO Call bats and create tests to check log output
 
