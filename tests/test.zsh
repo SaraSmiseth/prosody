@@ -37,9 +37,4 @@ sudo docker-compose down \
 && sleep 1 \
 && ./bats/bats-core/bin/bats tests.bats
 
-#&& sudo docker-compose logs | grep "message to" \
-#&& sudo docker-compose logs | grep "type='error'"
-# Received[c2s]: <message to='*@localhost' * type='chat'>
-# Should be five times in log
-
 sudo docker-compose down
