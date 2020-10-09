@@ -32,8 +32,10 @@ sudo docker-compose down \
 && sudo docker exec tests_prosody_1 /bin/bash -c "/entrypoint.sh register user3 localhost 12345678" \
 \
 && python --version \
-&& python -m venv venv \
+&& python3 --version \
+&& python3 -m venv venv \
 && source venv/bin/activate \
+&& python --version \
 && pip install -r requirements.txt \
 && pytest \
 && deactivate \
