@@ -17,6 +17,15 @@ jobs:
       - name: Install dependencies
         run: pacman -Syu --noconfirm docker docker-compose python sudo
 
+      - name: Status timezone
+        run: timedatectl status
+
+      - name: list timezones
+        run: timedatectl list-timezones
+
+      - name: Set timezone
+        run: timedatectl set-timezone Europe/Berlin
+
       - name: build test image
         run: docker build . -t prosody
 
