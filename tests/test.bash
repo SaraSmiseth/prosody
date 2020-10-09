@@ -31,6 +31,7 @@ sudo docker-compose down \
 && sudo docker exec tests_prosody_1 /bin/bash -c "/entrypoint.sh register user2 localhost 12345678" \
 && sudo docker exec tests_prosody_1 /bin/bash -c "/entrypoint.sh register user3 localhost 12345678" \
 \
+&& alias python=python3 \
 && python --version \
 && python -m venv venv \
 && source venv/bin/activate \
