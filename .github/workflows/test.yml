@@ -14,6 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install dependencies
+        run: pacman -Syu docker python
+
       - name: build test image
         run: docker build . -t prosody
 
