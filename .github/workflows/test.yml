@@ -8,7 +8,8 @@ on:
 
 jobs:
   test:
-    runs-on: archlinux:latest
+    runs-on: ubuntu-latest
+    container: archlinux:latest
 
     steps:
       - uses: actions/checkout@v2
