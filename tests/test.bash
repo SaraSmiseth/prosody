@@ -1,4 +1,6 @@
-#!/bin/zsh
+#!/bin/bash
+
+set -e
 
 # generate certs for testing
 

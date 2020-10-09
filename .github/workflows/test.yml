@@ -17,4 +17,4 @@ jobs:
         run: docker build . -t prosody
 
       - name: run tests
-        run: cd ./tests/ && bash ./test.zsh
+        run: cd ./tests/ && ./test.bash
