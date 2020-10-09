@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: pacman -Syu --noconfirm docker python
+        run: pacman -Syu --noconfirm docker python sudo
 
       - name: build test image
         run: docker build . -t prosody
