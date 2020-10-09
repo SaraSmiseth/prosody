@@ -13,6 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: install python3-venv
+        run: sudo apt-get install python3-venv
+
       - name: build test image
         run: docker build . -t prosody
 
