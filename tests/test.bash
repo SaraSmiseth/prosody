@@ -40,7 +40,7 @@ sudo docker-compose down \
 && pip install -r requirements.txt \
 && pytest \
 && deactivate \
-&& sleep 1 \
+&& sleep 5 \
 && ./bats/bats-core/bin/bats tests.bats
 
 sudo docker-compose down
