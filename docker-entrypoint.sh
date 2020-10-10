@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-echo "docker-entrypoint.sh"
-
 export ALLOW_REGISTRATION=${ALLOW_REGISTRATION:-true}
 export DOMAIN_HTTP_UPLOAD=${DOMAIN_HTTP_UPLOAD:-"upload.$DOMAIN"}
 export DOMAIN_MUC=${DOMAIN_MUC:-"conference.$DOMAIN"}
@@ -23,12 +21,7 @@ export SERVER_CONTACT_INFO_SECURITY=${SERVER_CONTACT_INFO_SECURITY:-"xmpp:securi
 export SERVER_CONTACT_INFO_SUPPORT=${SERVER_CONTACT_INFO_SUPPORT:-"xmpp:support@$DOMAIN"}
 export PROSODY_ADMINS=${PROSODY_ADMINS:-""}
 
-echo "docker-entrypoint.sh ENV variables initialized"
-
 if [[ "$1" != "prosody" ]]; then
-    echo "docker-entrypoint.sh prosodyctl"
-    echo "docker-entrypoint.sh @ $@"
-    echo "docker-entrypoint.sh * $*"
     exec prosodyctl $*
     exit 0;
 fi
@@ -42,5 +35,4 @@ if [ -z "$DOMAIN" ]; then
   exit 1
 fi
 
-echo "docker-entrypoint.sh last command"
 exec "$@"
