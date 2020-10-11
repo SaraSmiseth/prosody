@@ -17,11 +17,9 @@ generateCert() {
 
 generateCert "localhost"
 generateCert "conference.localhost"
-generateCert "pubsub.localhost"
 generateCert "proxy.localhost"
+generateCert "pubsub.localhost"
 generateCert "upload.localhost"
-
- # If updates are available --> update and create new version with 'pip-chill > requirements.txt'
 
 sudo docker-compose down \
 && sudo docker-compose up -d \
