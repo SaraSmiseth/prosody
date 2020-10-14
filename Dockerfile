@@ -1,5 +1,28 @@
 FROM debian:buster-slim
 
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VERSION
+
+ARG LUAROCKS_VERSION=3.4.0
+ARG PROSODY_VERSION=0.11.7
+
+ARG LUAROCKS_SHA256=62ce5826f0eeeb760d884ea8330cd1552b5d432138b8bade0fa72f35badd02d0
+ARG PROSODY_DOWNLOAD_SHA256=28ffc07653485cb63e22b387d3ea4825ee2baaee0c5827de4d6053a35b1c8747
+
+LABEL luarocks.version="${LUAROCKS_VERSION}"
+LABEL org.opencontainers.image.authors="Sara Smiseth"
+LABEL org.opencontainers.image.created="${BUILD_DATE}"
+LABEL org.opencontainers.image.description="This docker image provides you with a configured Prosody XMPP server."
+LABEL org.opencontainers.image.documentation="https://github.com/SaraSmiseth/prosody/blob/dev/readme.md"
+LABEL org.opencontainers.image.revision="${VCS_REF}"
+LABEL org.opencontainers.image.source="https://github.com/SaraSmiseth/prosody/archive/dev.zip"
+LABEL org.opencontainers.image.title="prosody"
+LABEL org.opencontainers.image.url="https://github.com/SaraSmiseth/prosody"
+LABEL org.opencontainers.image.vendor="Sara Smiseth"
+LABEL org.opencontainers.image.version="${VERSION}"
+LABEL prosody.version="${PROSODY_VERSION}"
+
 RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y \
       libevent-dev `# this is no build dependency, but needed for luaevent` \
@@ -15,18 +38,12 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-ENV PROSODY_VERSION 0.11.7
-ENV PROSODY_DOWNLOAD_URL https://prosody.im/downloads/source/prosody-${PROSODY_VERSION}.tar.gz
-ENV PROSODY_DOWNLOAD_SHA256 28ffc07653485cb63e22b387d3ea4825ee2baaee0c5827de4d6053a35b1c8747
-ENV LUAROCKS_VERSION 3.4.0
-ENV LUAROCKS_SHA256 62ce5826f0eeeb760d884ea8330cd1552b5d432138b8bade0fa72f35badd02d0
-
 RUN buildDeps='gcc git libc6-dev libidn11-dev liblua5.2-dev libsqlite3-dev libssl-dev make unzip' \
  && set -x \
  && apt-get update && apt-get install -y $buildDeps --no-install-recommends \
  && rm -rf /var/lib/apt/lists/* \
  \
- && wget -O prosody.tar.gz "${PROSODY_DOWNLOAD_URL}" \
+ && wget -O prosody.tar.gz "https://prosody.im/downloads/source/prosody-${PROSODY_VERSION}.tar.gz" \
  && echo "${PROSODY_DOWNLOAD_SHA256} *prosody.tar.gz" | sha256sum -c - \
  && mkdir -p /usr/src/prosody \
  && tar -xzf prosody.tar.gz -C /usr/src/prosody --strip-components=1 \
