@@ -39,6 +39,7 @@ sudo docker-compose down \
 && pytest \
 && deactivate \
 && sleep 5 \
+&& sudo docker-compose logs \
 && ./bats/bats-core/bin/bats tests.bats
 
 sudo docker-compose down
