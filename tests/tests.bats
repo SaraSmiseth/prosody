@@ -45,3 +45,51 @@ load 'bats/bats-assert/load'
   assert_success
   assert_output
 }
+
+@test "Should activate s2s" {
+  run bash -c "sudo docker-compose logs | grep \"Activated service 's2s' on \[::\]:5269, \[\*\]:5269\""
+  assert_success
+  assert_output
+}
+
+@test "Should activate c2s" {
+  run bash -c "sudo docker-compose logs | grep \"Activated service 'c2s' on \[::\]:5222, \[\*\]:5222\""
+  assert_success
+  assert_output
+}
+
+@test "Should activate legacy_ssl" {
+  run bash -c "sudo docker-compose logs | grep \"Activated service 'legacy_ssl' on \[::\]:5223, \[\*\]:5223\""
+  assert_success
+  assert_output
+}
+
+@test "Should activate proxy65" {
+  run bash -c "sudo docker-compose logs | grep \"Activated service 'proxy65' on \[::\]:5000, \[\*\]:5000\""
+  assert_success
+  assert_output
+}
+
+@test "Should activate http" {
+  run bash -c "sudo docker-compose logs | grep \"Activated service 'http' on \[::\]:5280, \[\*\]:5280\""
+  assert_success
+  assert_output
+}
+
+@test "Should activate https" {
+  run bash -c "sudo docker-compose logs | grep \"Activated service 'https' on \[::\]:5281, \[\*\]:5281\""
+  assert_success
+  assert_output
+}
+
+@test "Should load module cloud_notify" {
+  run bash -c "sudo docker-compose logs | grep \"localhost:cloud_notify            info	Module loaded\""
+  assert_success
+  assert_output
+}
+
+@test "Should show upload URL" {
+  run bash -c "sudo docker-compose logs | grep \"URL: <https:\/\/upload.localhost:5281\/upload> - Ensure this can be reached by users\""
+  assert_success
+  assert_output
+}
