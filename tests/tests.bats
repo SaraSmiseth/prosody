@@ -5,7 +5,7 @@ load 'bats/bats-assert/load'
 
 # group alternation in regex because the xml properties switch around. sometimes 'type=...' comes after 'to=...' and sometimes before
 @test "Should send 5 messages" {
-  run bash -c "sudo docker-compose logs | grep -E \"Received\[c2s\]: <message (type='chat' to='.*@localhost'|to='.*@localhost' type='chat') id=':.*'>\" | wc -l"
+  run bash -c "sudo docker-compose logs | grep -E \"Received\[c2s\]: <message (type='chat'|to='.*@localhost'|id=':.*') (type='chat'|to='.*@localhost'|id=':.*') (type='chat'|to='.*@localhost'|id=':.*')>\" | wc -l"
   assert_success
   assert_output "5"
 }
