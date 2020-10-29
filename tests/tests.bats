@@ -83,7 +83,7 @@ load 'bats/bats-assert/load'
 }
 
 @test "Should load module cloud_notify" {
-  run bash -c "sudo docker-compose logs | grep \"localhost:cloud_notify\tinfo\tModule loaded\""
+  run bash -c "sudo docker-compose logs | grep \"localhost:cloud_notify.*info.*Module loaded\""
   assert_success
   assert_output
 }
