@@ -47,37 +47,37 @@ load 'bats/bats-assert/load'
 }
 
 @test "Should activate s2s" {
-  run bash -c "sudo docker-compose logs | grep \"Activated service 's2s' on \[::\]:5269, \[\*\]:5269\""
+  run bash -c "sudo docker-compose logs | grep -E \"Activated service 's2s' on (\[::\]:5269|\[\*\]:5269), (\[::\]:5269|\[\*\]:5269)\""
   assert_success
   assert_output
 }
 
 @test "Should activate c2s" {
-  run bash -c "sudo docker-compose logs | grep \"Activated service 'c2s' on \[::\]:5222, \[\*\]:5222\""
+  run bash -c "sudo docker-compose logs | grep -E \"Activated service 'c2s' on (\[::\]:5222|\[\*\]:5222), (\[::\]:5222|\[\*\]:5222)\""
   assert_success
   assert_output
 }
 
 @test "Should activate legacy_ssl" {
-  run bash -c "sudo docker-compose logs | grep \"Activated service 'legacy_ssl' on \[::\]:5223, \[\*\]:5223\""
+  run bash -c "sudo docker-compose logs | grep -E \"Activated service 'legacy_ssl' on (\[::\]:5223|\[\*\]:5223), (\[::\]:5223|\[\*\]:5223)\""
   assert_success
   assert_output
 }
 
 @test "Should activate proxy65" {
-  run bash -c "sudo docker-compose logs | grep \"Activated service 'proxy65' on \[::\]:5000, \[\*\]:5000\""
+  run bash -c "sudo docker-compose logs | grep -E \"Activated service 'proxy65' on (\[::\]:5000|\[\*\]:5000), (\[::\]:5000|\[\*\]:5000)\""
   assert_success
   assert_output
 }
 
 @test "Should activate http" {
-  run bash -c "sudo docker-compose logs | grep \"Activated service 'http' on \[::\]:5280, \[\*\]:5280\""
+  run bash -c "sudo docker-compose logs | grep -E \"Activated service 'http' on (\[::\]:5280|\[\*\]:5280), (\[::\]:5280|\[\*\]:5280)\""
   assert_success
   assert_output
 }
 
 @test "Should activate https" {
-  run bash -c "sudo docker-compose logs | grep \"Activated service 'https' on \[::\]:5281, \[\*\]:5281\""
+  run bash -c "sudo docker-compose logs | grep -E \"Activated service 'https' on (\[::\]:5281|\[\*\]:5281), (\[::\]:5281|\[\*\]:5281)\""
   assert_success
   assert_output
 }
