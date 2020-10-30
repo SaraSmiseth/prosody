@@ -12,8 +12,6 @@ services:
       - "5281:5281"
     environment:
       DOMAIN: localhost
-      #E2E_POLICY_CHAT: optional
-      #E2E_POLICY_MUC: optional
       E2E_POLICY_WHITELIST: "admin@localhost, user1@localhost"
       LOG_LEVEL: debug
       PROSODY_ADMINS: "admin@localhost, admin2@localhost"
@@ -24,4 +22,3 @@ services:
       - "upload.localhost:127.0.0.1"
     volumes:
       - ./certs:/usr/local/etc/prosody/certs
-        #- ./data:/usr/local/var/lib/prosody
