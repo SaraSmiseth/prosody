@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+* Updated luarocks to version 3.5.0.
+
 ## v1.1.3
 
 ### New features
