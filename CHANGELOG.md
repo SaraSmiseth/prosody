@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+* Nothing
+
+## v1.1.4
+
+* Updated to Prosody version [0.11.8](https://blog.prosody.im/prosody-0.11.8-released/).
 * Updated luarocks to version 3.5.0.
 
 ## v1.1.3
