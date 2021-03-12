@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-* Nothing
+* Added modules that allow invite-based account registration for Prosody. See also [Great Invitations](https://blog.prosody.im/great-invitations/).
 
 ## v1.2.0
 

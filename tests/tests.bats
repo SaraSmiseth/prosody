@@ -93,3 +93,9 @@ load 'bats/bats-assert/load'
   assert_success
   assert_output
 }
+
+# TODO Add tests for register_apps etc
+# Serving 'register_apps' at https://localhost:5281/register_apps
+#prosody_1  | localhost:http          debug	Serving 'register_apps' at https://localhost/register_apps
+#prosody_1  | localhost:http          debug	Serving 'invites_page' at https://localhost/invite
+#prosody_1  | localhost:http          debug	Serving 'invites_register_web' at https://localhost/register

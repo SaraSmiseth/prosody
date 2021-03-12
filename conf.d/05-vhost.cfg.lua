@@ -19,7 +19,15 @@ https_ssl = {
 	key = "certs/" .. domain_http_upload .. "/privkey.pem";
 }
 
+-- Configure the number of seconds a token is valid for (default 7 days)
+-- TODO make configurable
+invite_expiry = 86400 * 7
+
 VirtualHost (domain)
+    http_paths = {
+        invites_page = "/invite";
+        invites_register_web = "/register";
+     }
 
 -- Set up a http file upload because proxy65 is not working in muc
 Component (domain_http_upload) "http_upload"

@@ -189,6 +189,7 @@ Inspect logs: ```docker-compose logs -f```.
 | Variable                         | Description                                                                                                          | Type         | Default value              |
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------------ | -------------------------- |
 | **ALLOW_REGISTRATION**           | Whether to allow registration of new accounts via Jabber clients                                                     | *optional*   | true                       |
+| **REGISTRATION_INVITE_ONLY**     | Require an invitation token for all account registration                                                             | *optional*   | true                       |
 | **DOMAIN**                       | domain                                                                                                               | **required** | null                       |
 | **DOMAIN_HTTP_UPLOAD**           | Domain which lets clients upload files over HTTP                                                                     | *optional*   | upload.**DOMAIN**          |
 | **DOMAIN_MUC**                   | Domain for Multi-user chat (MUC) for allowing you to create hosted chatrooms/conferences for XMPP users              | *optional*   | conference.**DOMAIN**      |
