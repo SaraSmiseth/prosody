@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-* Nothing
+* Updated luarocks to version 3.6.0.
 
 ## v1.1.4
 
