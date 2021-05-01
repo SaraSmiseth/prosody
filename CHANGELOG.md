@@ -3,6 +3,7 @@
 ## Unreleased
 
 * Updated luarocks to version 3.7.0.
+* Create environment variables for database settings. It is now possible to use MariaDB or Postgres instead of SQLite.
 
 ## v1.1.4
 

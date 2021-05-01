@@ -21,6 +21,10 @@ export SERVER_CONTACT_INFO_SECURITY=${SERVER_CONTACT_INFO_SECURITY:-"xmpp:securi
 export SERVER_CONTACT_INFO_SUPPORT=${SERVER_CONTACT_INFO_SUPPORT:-"xmpp:support@$DOMAIN"}
 export PROSODY_ADMINS=${PROSODY_ADMINS:-""}
 
+# TODO sort into above
+export DB_DRIVER=${DB_DRIVER:-"SQLite3"}
+export DB_DATABASE=${DB_DATABASE:-"prosody.sqlite"}
+
 if [[ "$1" != "prosody" ]]; then
     exec prosodyctl $*
     exit 0;

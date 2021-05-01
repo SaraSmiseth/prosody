@@ -194,6 +194,12 @@ Inspect logs: ```docker-compose logs -f```.
 | **DOMAIN_MUC**                   | Domain for Multi-user chat (MUC) for allowing you to create hosted chatrooms/conferences for XMPP users              | *optional*   | conference.**DOMAIN**      |
 | **DOMAIN_PROXY**                 | Domain for SOCKS5 bytestream proxy for server-proxied file transfers                                                 | *optional*   | proxy.**DOMAIN**           |
 | **DOMAIN_PUBSUB**                | Domain for a XEP-0060 pubsub service                                                                                 | *optional*   | pubsub.**DOMAIN**          |
+|**DB_DRIVER** | May also be "PostgreSQL" or "MySQL" or "SQLite3" (case sensitive!)|
+|**DB_DATABASE** | The database name to use. For SQLite3 this the database filename (relative to the data storage directory).|
+|**DB_HOST** | The address of the database server (delete this line for Postgres)|
+|**DB_PORT** | 3306 - For databases connecting over TCP|
+|**DB_USERNAME** | The username to authenticate to the database|
+|**DB_PASSWORD** | The password to authenticate to the database|
 | **E2E_POLICY_CHAT**              | Policy for chat messages. Possible values: "none", "optional" and "required".                                        | *optional*   | "required"                 |
 | **E2E_POLICY_MUC**               | Policy for MUC messages. Possible values: "none", "optional" and "required".                                         | *optional*   | "required"                 |
 | **E2E_POLICY_WHITELIST**         | Make this module ignore messages sent to and from this JIDs or MUCs.                                                 | *optional*   | ""                         |
