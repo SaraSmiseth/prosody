@@ -21,7 +21,10 @@ generateCert "proxy.localhost"
 generateCert "pubsub.localhost"
 generateCert "upload.localhost"
 
+# Start postgres first and wait for 10 seconds before starting prosody.
 sudo docker-compose down \
+&& sudo docker-compose up -d postgres \
+&& sleep 10 \
 && sudo docker-compose up -d \
 \
 && sudo docker exec tests_prosody_1 /bin/bash -c "/entrypoint.sh register admin localhost 12345678" \

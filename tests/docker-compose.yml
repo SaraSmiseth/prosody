@@ -15,8 +15,13 @@ services:
       E2E_POLICY_WHITELIST: "admin@localhost, user1@localhost"
       LOG_LEVEL: debug
       PROSODY_ADMINS: "admin@localhost, admin2@localhost"
-      #DB_DRIVER: "SQLite3"
-      #DB_DATABASE: "prosody.sqlite"
+      #DB_DRIVER: "MySQL"
+      #DB_DRIVER: "PostgreSQL"
+      #DB_DATABASE: "prosody"
+      #DB_HOST: "postgres"
+      #DB_PORT: "5432"
+      #DB_USERNAME: "prosody"
+      #DB_PASSWORD: "prosody"
     extra_hosts:
       - "conference.localhost:127.0.0.1"
       - "pubsub.localhost:127.0.0.1"
