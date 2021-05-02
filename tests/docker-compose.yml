@@ -15,18 +15,30 @@ services:
       E2E_POLICY_WHITELIST: "admin@localhost, user1@localhost"
       LOG_LEVEL: debug
       PROSODY_ADMINS: "admin@localhost, admin2@localhost"
+    volumes:
+      - ./certs:/usr/local/etc/prosody/certs
+
+  prosody_postgres:
+    image: prosody
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+      - "5222:5222"
+      - "5223:5223"
+      - "5269:5269"
+      - "5281:5281"
+    environment:
+      DOMAIN: localhost
+      E2E_POLICY_WHITELIST: "admin@localhost, user1@localhost"
+      LOG_LEVEL: debug
+      PROSODY_ADMINS: "admin@localhost, admin2@localhost"
       #DB_DRIVER: "MySQL"
-      #DB_DRIVER: "PostgreSQL"
-      #DB_DATABASE: "prosody"
-      #DB_HOST: "postgres"
-      #DB_PORT: "5432"
-      #DB_USERNAME: "prosody"
-      #DB_PASSWORD: "prosody"
-    extra_hosts:
-      - "conference.localhost:127.0.0.1"
-      - "pubsub.localhost:127.0.0.1"
-      - "proxy.localhost:127.0.0.1"
-      - "upload.localhost:127.0.0.1"
+      DB_DRIVER: "PostgreSQL"
+      DB_DATABASE: "prosody"
+      DB_HOST: "postgres"
+      DB_PORT: "5432"
+      DB_USERNAME: "prosody"
+      DB_PASSWORD: "prosody"
     volumes:
       - ./certs:/usr/local/etc/prosody/certs
     depends_on:
@@ -39,5 +51,3 @@ services:
       POSTGRES_DB: prosody
       POSTGRES_USER: prosody
       POSTGRES_PASSWORD: prosody
-    #volumes:
-      #- ./postgres-data:/var/lib/postgresql/data

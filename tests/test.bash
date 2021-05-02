@@ -15,6 +15,30 @@ generateCert() {
     fi
 }
 
+registerTestUsers() {
+    local containerName="$1"
+    sudo docker exec "$containerName" /bin/bash -c "/entrypoint.bash register admin localhost 12345678" \
+    && sudo docker exec "$containerName" /bin/bash -c "/entrypoint.bash register user1 localhost 12345678" \
+    && sudo docker exec "$containerName" /bin/bash -c "/entrypoint.bash register user2 localhost 12345678" \
+    && sudo docker exec "$containerName" /bin/bash -c "/entrypoint.bash register user3 localhost 12345678"
+}
+
+runTests() {
+    local containerName="$1"
+    python --version \
+    && python3 --version \
+    && python3 -m venv venv \
+    && source venv/bin/activate \
+    && python --version \
+    && pip --version \
+    && pip install -r requirements.txt \
+    && pytest \
+    && deactivate \
+    && sleep 5 \
+    && sudo docker-compose logs "$containerName" \
+    && ./bats/bats-core/bin/bats tests.bats
+}
+
 generateCert "localhost"
 generateCert "conference.localhost"
 generateCert "proxy.localhost"
@@ -25,24 +49,9 @@ generateCert "upload.localhost"
 sudo docker-compose down \
 && sudo docker-compose up -d postgres \
 && sleep 10 \
-&& sudo docker-compose up -d \
-\
-&& sudo docker exec tests_prosody_1 /bin/bash -c "/entrypoint.sh register admin localhost 12345678" \
-&& sudo docker exec tests_prosody_1 /bin/bash -c "/entrypoint.sh register user1 localhost 12345678" \
-&& sudo docker exec tests_prosody_1 /bin/bash -c "/entrypoint.sh register user2 localhost 12345678" \
-&& sudo docker exec tests_prosody_1 /bin/bash -c "/entrypoint.sh register user3 localhost 12345678" \
-\
-&& python --version \
-&& python3 --version \
-&& python3 -m venv venv \
-&& source venv/bin/activate \
-&& python --version \
-&& pip --version \
-&& pip install -r requirements.txt \
-&& pytest \
-&& deactivate \
-&& sleep 5 \
-&& sudo docker-compose logs \
-&& ./bats/bats-core/bin/bats tests.bats
+&& sudo docker-compose up -d prosody_postgres
+
+registerTestUsers tests_prosody_postgres_1
+runTests prosody_postgres
 
 sudo docker-compose down

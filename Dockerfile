@@ -89,7 +89,7 @@ ENV __FLUSH_LOG yes
 VOLUME ["/usr/local/var/lib/prosody"]
 
 COPY prosody.cfg.lua /usr/local/etc/prosody/prosody.cfg.lua
-COPY docker-entrypoint.sh /entrypoint.sh
+COPY docker-entrypoint.bash /entrypoint.bash
 COPY conf.d/*.cfg.lua /usr/local/etc/prosody/conf.d/
 
 COPY *.bash /usr/local/bin/
@@ -110,6 +110,6 @@ RUN download-prosody-modules.bash \
 
 USER prosody
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.bash"]
 CMD ["prosody", "-F"]
 
