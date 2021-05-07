@@ -2,10 +2,21 @@
 
 ## Unreleased
 
+* Nothing
+
+## v1.2.0
+
+### New features
+
+* New environment variables for database settings. It is now possible to use MariaDB or Postgres instead of SQLite. SQLite is the default. See [README](https://github.com/SaraSmiseth/prosody#environment-variables).
+
+### Updates
+
 * Updated luarocks to version 3.7.0.
-* Create environment variables for database settings. It is now possible to use MariaDB or Postgres instead of SQLite. SQLite is the default.
 
 ## v1.1.4
+
+### Updates
 
 * Updated to Prosody version [0.11.8](https://blog.prosody.im/prosody-0.11.8-released/).
 * Updated luarocks to version 3.5.0.
