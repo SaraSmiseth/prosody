@@ -43,7 +43,8 @@ runTests() {
     && sleep 5 \
     && sudo docker-compose logs "$containerName" \
     && export batsContainerName="$containerName" \
-    && ./bats/bats-core/bin/bats tests.bats
+    && ./bats/bats-core/bin/bats tests.bats \
+    && ./bats/bats-core/bin/bats tests-"$containerName".bats
 }
 
 generateCert "localhost"
