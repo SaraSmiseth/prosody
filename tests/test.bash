@@ -15,12 +15,18 @@ generateCert() {
     fi
 }
 
+registerTestUser() {
+    local userName="$1"
+    local containerName="$2"
+    sudo docker exec "$containerName" /bin/bash -c "/entrypoint.bash register $userName localhost 12345678"
+}
+
 registerTestUsers() {
     local containerName="$1"
-    sudo docker exec "$containerName" /bin/bash -c "/entrypoint.bash register admin localhost 12345678" \
-    && sudo docker exec "$containerName" /bin/bash -c "/entrypoint.bash register user1 localhost 12345678" \
-    && sudo docker exec "$containerName" /bin/bash -c "/entrypoint.bash register user2 localhost 12345678" \
-    && sudo docker exec "$containerName" /bin/bash -c "/entrypoint.bash register user3 localhost 12345678"
+    registerTestUser admin "$containerName"
+    registerTestUser user1 "$containerName"
+    registerTestUser user2 "$containerName"
+    registerTestUser user3 "$containerName"
 }
 
 runTests() {
@@ -36,6 +42,7 @@ runTests() {
     && deactivate \
     && sleep 5 \
     && sudo docker-compose logs "$containerName" \
+    && export batsContainerName="$containerName" \
     && ./bats/bats-core/bin/bats tests.bats
 }
 
@@ -45,6 +52,7 @@ generateCert "proxy.localhost"
 generateCert "pubsub.localhost"
 generateCert "upload.localhost"
 
+# Run tests for first container with postgres
 # Start postgres first and wait for 10 seconds before starting prosody.
 sudo docker-compose down \
 && sudo docker-compose up -d postgres \
@@ -53,5 +61,10 @@ sudo docker-compose down \
 
 registerTestUsers tests_prosody_postgres_1
 runTests prosody_postgres
+sudo docker-compose down
 
+# Run tests for second container with SQLite
+sudo docker-compose up -d prosody
+registerTestUsers tests_prosody_1
+runTests prosody
 sudo docker-compose down
