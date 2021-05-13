@@ -38,6 +38,7 @@ While Conversations got everything set-up out-of-the-box, Gajim was used with th
         - [Symlinks](#symlinks)
         - [Permissions](#permissions)
     - [Run](#run)
+    - [Volumes permissions](#volumes-permissions)
     - [Docker tags](#docker-tags)
     - [Configuration](#configuration)
       - [Environment variables](#environment-variables)
@@ -142,6 +143,7 @@ For example ```cp -L src dest```.
 ##### Permissions
 
 See official [documentation](https://prosody.im/doc/certificates#permissions) for more information.
+Check [Volumes permissions](#volumes-permissions) as well.
 
 ### Run
 
@@ -152,7 +154,7 @@ version: '3.7'
 
 services:
   server:
-    image: sarasmiseth/prosody:v1.0.0
+    image: sarasmiseth/prosody:latest
     restart: unless-stopped
     ports:
       - "5000:5000"
@@ -170,6 +172,15 @@ services:
 Boot it via: ```docker-compose up -d```.
 
 Inspect logs: ```docker-compose logs -f```.
+
+### Volumes permissions
+
+The prosody user inside the container has the `uid=999` and `gid=999`. If you use the example `docker-compose.yml` from above make sure, that the `./data` folder and the `./certs` folder have the correct permissions.
+
+``` shell
+sudo chown 999:999 ./certs
+sudo chown 999:999 ./data
+```
 
 ### Docker tags
 
