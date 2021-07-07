@@ -23,10 +23,16 @@ LABEL org.opencontainers.image.vendor="Sara Smiseth"
 LABEL org.opencontainers.image.version="${VERSION}"
 LABEL prosody.version="${PROSODY_VERSION}"
 
+# TODO just for mod_invites, makes the image from 90MB to 150MB, just do it like this?
+#libjs-bootstrap4
+#libjs-jquery
+
 RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y \
       libevent-dev `# this is no build dependency, but needed for luaevent` \
       libidn11 \
+      libjs-bootstrap4 \
+      libjs-jquery \
       libpq-dev \
       libsqlite3-0 \
       lua5.2 \
@@ -102,9 +108,16 @@ RUN download-prosody-modules.bash \
         csi `# client state indication (XEP-0352)` \
         e2e_policy `# require end-2-end encryption` \
         filter_chatstates `# disable "X is typing" type messages` \
+        http_libjs `# invite-based account registration web dependency` \
+        http_upload `# file sharing (XEP-0363)` \
+        invites `# invite-based account registration` \
+        invites_adhoc \
+        invites_page \
+        invites_register \
+        invites_register_web \
+        register_apps \
         smacks `# stream management (XEP-0198)` \
         throttle_presence `# presence throttling in CSI` \
-        http_upload `# file sharing (XEP-0363)` \
         vcard_muc `# XEP-0153: vCard-Based Avatar (MUC)` \
  && rm -rf "/usr/src/prosody-modules"
 

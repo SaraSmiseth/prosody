@@ -93,3 +93,21 @@ load 'bats/bats-assert/load'
   assert_success
   assert_output
 }
+
+@test "Should serve register_apps" {
+  run bash -c "sudo docker-compose logs | grep \"Serving 'register_apps' at https:\/\/localhost:5281\/register_apps\""
+  assert_success
+  assert_output
+}
+
+@test "Should serve invites_page" {
+  run bash -c "sudo docker-compose logs | grep \"Serving 'invites_page' at https:\/\/localhost:5281\/invite\""
+  assert_success
+  assert_output
+}
+
+@test "Should serve invites_register_web" {
+  run bash -c "sudo docker-compose logs | grep \"Serving 'invites_register_web' at https:\/\/localhost:5281\/register\""
+  assert_success
+  assert_output
+}
