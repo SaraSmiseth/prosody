@@ -4,6 +4,19 @@
 
 * Nothing
 
+## v1.2.4
+
+* Updated to Prosody version [0.11.11](https://blog.prosody.im/prosody-0.11.11-released/).
+* Updated luarocks to version 3.8.0.
+
+## v1.2.3
+
+* Updated to Prosody version [0.11.10](https://blog.prosody.im/prosody-0.11.10-released/).
+
+## v1.2.2
+
+- Update debian from buster-slim to bullseye-slim (#27)
+
 ## v1.2.1
 
 * Updated to Prosody version [0.11.9](https://blog.prosody.im/prosody-0.11.9-released/).
