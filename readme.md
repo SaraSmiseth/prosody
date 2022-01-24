@@ -9,7 +9,7 @@
 [![Github open issues](https://img.shields.io/github/issues-raw/SaraSmiseth/prosody)](https://github.com/SaraSmiseth/prosody/issues)
 [![Github open pull requests](https://img.shields.io/github/issues-pr-raw/SaraSmiseth/prosody)](https://github.com/SaraSmiseth/prosody/pulls)
 
-This docker image provides you with a configured [Prosody](https://prosody.im/) XMPP server. The image is based on `debian:buster-slim`.
+This docker image provides you with a configured [Prosody](https://prosody.im/) XMPP server. The image is based on `debian:bullseye-slim`.
 The server was tested using the Android App [Conversations](https://conversations.im/) and the Desktop client [Gajim](https://gajim.org).
 Multiple [architectures](https://hub.docker.com/r/sarasmiseth/prosody/tags) are supported. I use it on my raspberry pi 4.
 
