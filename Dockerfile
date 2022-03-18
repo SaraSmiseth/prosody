@@ -5,10 +5,10 @@ ARG VCS_REF
 ARG VERSION
 
 ARG LUAROCKS_VERSION=3.8.0
-ARG PROSODY_VERSION=0.11.13
+ARG PROSODY_VERSION=0.12.0
 
 ARG LUAROCKS_SHA256=56ab9b90f5acbc42eb7a94cf482e6c058a63e8a1effdf572b8b2a6323a06d923
-ARG PROSODY_DOWNLOAD_SHA256=39c61b346a09b5125b604cb969e14206cbbcb86c81156ffc6ba2d62527cf0432
+ARG PROSODY_DOWNLOAD_SHA256=752ff32015dac565fc3417c2196af268971c358ee066e51f5d912413580d889a
 
 LABEL luarocks.version="${LUAROCKS_VERSION}"
 LABEL org.opencontainers.image.authors="Sara Smiseth"
@@ -25,11 +25,10 @@ LABEL prosody.version="${PROSODY_VERSION}"
 
 RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-      libevent-dev `# this is no build dependency, but needed for luaevent` \
       libidn11 \
       libpq-dev \
       libsqlite3-0 \
-      lua5.2 \
+      lua5.4 \
       lua-bitop \
       lua-dbi-mysql \
       lua-expat \
@@ -40,7 +39,7 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-RUN buildDeps='gcc git libc6-dev libidn11-dev liblua5.2-dev libsqlite3-dev libssl-dev make unzip' \
+RUN buildDeps='gcc git libc6-dev libidn11-dev liblua5.4-dev libsqlite3-dev libssl-dev libicu-dev make unzip' \
  && set -x \
  && apt-get update && apt-get install -y $buildDeps --no-install-recommends \
  && rm -rf /var/lib/apt/lists/* \
@@ -65,7 +64,6 @@ RUN buildDeps='gcc git libc6-dev libidn11-dev liblua5.2-dev libsqlite3-dev libss
  && make bootstrap \
  && cd / && rm -r /usr/src/luarocks \
  \
- && luarocks install luaevent \
  && luarocks install luadbi \
  `#&& luarocks install luadbi-mysql MYSQL_INCDIR=/usr/include/mariadb/` \
  && luarocks install luadbi-postgresql POSTGRES_INCDIR=/usr/include/postgresql/ \
