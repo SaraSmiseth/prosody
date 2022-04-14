@@ -25,10 +25,12 @@ LABEL prosody.version="${PROSODY_VERSION}"
 
 RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+      libevent-dev `# this is no build dependency, but needed for luaevent` \
+      libicu67 \
       libidn11 \
       libpq-dev \
       libsqlite3-0 \
-      lua5.4 \
+      lua5.2 \
       lua-bitop \
       lua-dbi-mysql \
       lua-expat \
@@ -39,7 +41,7 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-RUN buildDeps='gcc git libc6-dev libidn11-dev liblua5.4-dev libsqlite3-dev libssl-dev libicu-dev make unzip' \
+RUN buildDeps='gcc git libc6-dev libidn11-dev liblua5.2-dev libsqlite3-dev libssl-dev libicu-dev make unzip' \
  && set -x \
  && apt-get update && apt-get install -y $buildDeps --no-install-recommends \
  && rm -rf /var/lib/apt/lists/* \
@@ -64,6 +66,7 @@ RUN buildDeps='gcc git libc6-dev libidn11-dev liblua5.4-dev libsqlite3-dev libss
  && make bootstrap \
  && cd / && rm -r /usr/src/luarocks \
  \
+ && luarocks install luaevent \
  && luarocks install luadbi \
  `#&& luarocks install luadbi-mysql MYSQL_INCDIR=/usr/include/mariadb/` \
  && luarocks install luadbi-postgresql POSTGRES_INCDIR=/usr/include/postgresql/ \
