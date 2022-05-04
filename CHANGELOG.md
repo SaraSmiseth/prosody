@@ -7,6 +7,7 @@
 ## v1.2.7
 
 * Updated to Prosody version [0.12.0](https://blog.prosody.im/prosody-0.12.0-released/).
+* Updated luarocks to version 3.9.0.
 
 ## v1.2.6
 
