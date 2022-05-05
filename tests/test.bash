@@ -18,7 +18,7 @@ generateCert() {
 registerTestUser() {
     local userName="$1"
     local containerName="$2"
-    sudo docker exec "$containerName" /bin/bash -c "/entrypoint.bash register $userName localhost 12345678"
+    sudo docker compose exec "$containerName" /bin/bash -c "/entrypoint.bash register $userName localhost 12345678"
 }
 
 registerTestUsers() {
@@ -60,12 +60,12 @@ sudo docker-compose down \
 && sleep 10 \
 && sudo docker-compose up -d prosody_postgres
 
-registerTestUsers tests_prosody_postgres_1
+registerTestUsers prosody_postgres
 runTests prosody_postgres
 sudo docker-compose down
 
 # Run tests for second container with SQLite
 sudo docker-compose up -d prosody
-registerTestUsers tests_prosody_1
+registerTestUsers prosody
 runTests prosody
 sudo docker-compose down

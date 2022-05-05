@@ -37,6 +37,7 @@ RUN apt-get update \
       lua-filesystem \
       lua-socket \
       lua-sec \
+      lua-unbound \
       wget \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
