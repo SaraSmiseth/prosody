@@ -10,33 +10,33 @@ load 'bats/bats-assert/load'
 }
 
 @test "Should select certificate for localhost" {
-  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Selecting certificate /usr/local/etc/prosody/certs/localhost/fullchain.pem with key /usr/local/etc/prosody/certs/localhost/privkey.pem for localhost\" | wc -l"
+  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Certificates loaded\" | grep \"localhost:tls\" | wc -l"
   assert_success
-  assert_output "15"
+  assert_output "1"
 }
 
 @test "Should select certificate for conference.localhost" {
-  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Selecting certificate /usr/local/etc/prosody/certs/conference.localhost/fullchain.pem with key /usr/local/etc/prosody/certs/conference.localhost/privkey.pem for conference.localhost\" | wc -l"
+  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Certificates loaded\" | grep \"conference.localhost:tls\" | wc -l"
   assert_success
-  assert_output "11"
+  assert_output "1"
 }
 
 @test "Should select certificate for proxy.localhost" {
-  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Selecting certificate /usr/local/etc/prosody/certs/proxy.localhost/fullchain.pem with key /usr/local/etc/prosody/certs/proxy.localhost/privkey.pem for proxy.localhost\" | wc -l"
+  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Certificates loaded\" | grep \"proxy.localhost:tls\" | wc -l"
   assert_success
-  assert_output "11"
+  assert_output "1"
 }
 
 @test "Should select certificate for pubsub.localhost" {
-  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Selecting certificate /usr/local/etc/prosody/certs/pubsub.localhost/fullchain.pem with key /usr/local/etc/prosody/certs/pubsub.localhost/privkey.pem for pubsub.localhost\" | wc -l"
+  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Certificates loaded\" | grep \"pubsub.localhost:tls\" | wc -l"
   assert_success
-  assert_output "11"
+  assert_output "1"
 }
 
 @test "Should select certificate for upload.localhost" {
-  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Selecting certificate /usr/local/etc/prosody/certs/upload.localhost/fullchain.pem with key /usr/local/etc/prosody/certs/upload.localhost/privkey.pem for upload.localhost\" | wc -l"
+  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Certificates loaded\" | grep \"upload.localhost:tls\" | wc -l"
   assert_success
-  assert_output "15"
+  assert_output "1"
 }
 
 @test "Should log error for user with wrong password" {
