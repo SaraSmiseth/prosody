@@ -10,7 +10,7 @@ load 'bats/bats-assert/load'
 }
 
 @test "Should select certificate for localhost" {
-  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Certificates loaded\" | grep \"localhost:tls\" | wc -l"
+  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Certificates loaded\" | grep \" localhost:tls\" | wc -l"
   assert_success
   assert_output "1"
 }
