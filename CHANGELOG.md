@@ -4,6 +4,10 @@
 
 * Nothing
 
+## v1.2.8
+
+* Updated to Prosody version [0.12.1](https://blog.prosody.im/prosody-0.12.1-released/).
+
 ## v1.2.7
 
 * Updated to Prosody version [0.12.0](https://blog.prosody.im/prosody-0.12.0-released/).
