@@ -10,6 +10,7 @@ pidfile = "/var/run/prosody/prosody.pid"
 use_libevent = true; -- improves performance
 
 allow_registration = os.getenv("ALLOW_REGISTRATION");
+registration_invite_only = os.getenv("REGISTRATION_INVITE_ONLY");
 
 c2s_require_encryption = os.getenv("C2S_REQUIRE_ENCRYPTION");
 s2s_require_encryption = os.getenv("S2S_REQUIRE_ENCRYPTION");
