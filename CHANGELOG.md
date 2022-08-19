@@ -4,6 +4,11 @@
 
 * Nothing
 
+## v1.2.9
+
+* New environment variable STORAGE was added. Defaults to `sql` like before. See [prosody docs](https://prosody.im/doc/storage). This fixes [#38](https://github.com/SaraSmiseth/prosody/issues/38).
+* New tests for a container with STORAGE set to `internal`.
+
 ## v1.2.8
 
 * Updated to Prosody version [0.12.1](https://blog.prosody.im/prosody-0.12.1-released/).

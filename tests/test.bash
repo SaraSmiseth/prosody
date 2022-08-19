@@ -69,3 +69,9 @@ sudo docker-compose up -d prosody
 registerTestUsers prosody
 runTests prosody
 sudo docker-compose down
+
+# Run tests for third container with internal storage
+sudo docker-compose up -d prosody_internal_storage
+registerTestUsers prosody_internal_storage
+runTests prosody_internal_storage
+sudo docker-compose down
