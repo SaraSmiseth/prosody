@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  tor:
+    image: prosody_tor:latest #goldy/tor but compiled for armV8
+    links:
+      - prosody
+    restart: unless-stopped
+    ports:
+      - "9051:9051"
+    volumes:
+      - ./onion/:/var/lib/tor/hidden_service/
+    environment:
+      PROSODY_TOR_SERVICE_HOSTS: 5000:prosody:5000,5222:prosody:5222,5223:prosody:5223,5269:prosody:5269,5281:prosody:5281
+      TOR_SOCKS_PORT: 0.0.0.0:9051
+    hostname: tor
+  prosody:
+    build: ./prosody
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+      - "5222:5222"
+      - "5223:5223"
+      - "5269:5269"
+      - "5281:5281"
+#      - "53:53"
+    environment:
+      E2E_POLICY_CHAT: "required"
+      E2E_POLICY_MUC: "required"
+      ALLOW_REGISTRATION: "true"
+      PROSODY_ADMINS: "admin@xxx.onion"
+      DOMAIN: xxx.onion
+      STORAGE: "internal"
+      HTTP_PROXY: "socks5h://tor:9051"
+      HTTPS_PROXY: "socks5h://tor:9051"
+    volumes:
+      - ./data:/usr/local/var/lib/prosody
+      - ./certs:/usr/local/etc/prosody/certs
+    hostname: prosody
