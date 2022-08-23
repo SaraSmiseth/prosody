@@ -14,7 +14,7 @@ archive_store = "archive2" -- Use the same data store as prosody-modules mod_mam
 
 storage = {
   -- this makes mod_mam use the sql storage backend
-  archive2 = os.getenv("STORAGE");
+  archive = os.getenv("STORAGE");
 }
 
 -- https://modules.prosody.im/mod_mam.html
