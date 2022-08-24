@@ -1,4 +1,4 @@
-default_storage = os.getenv("STORAGE")
+default_storage = os.getenv("DEFAULT_STORAGE")
 
 sql = {
   driver = os.getenv("DB_DRIVER");
@@ -9,12 +9,11 @@ sql = {
   password = os.getenv("DB_PASSWORD");
 }
 
--- make 0.10-distributed mod_mam use sql store
-archive_store = "archive2" -- Use the same data store as prosody-modules mod_mam
+archive_store = os.getenv("ARCHIVE_STORE")
 
 storage = {
   -- this makes mod_mam use the sql storage backend
-  archive2 = os.getenv("STORAGE");
+  archive2 = os.getenv("STORAGE_ARCHIVE2");
 }
 
 -- https://modules.prosody.im/mod_mam.html

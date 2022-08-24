@@ -150,7 +150,7 @@ Check [Volumes permissions](#volumes-permissions) as well.
 I recommend using a `docker-compose.yml` file:
 
 ```yaml
-version: '3.7'
+version: "3.7"
 
 services:
   server:
@@ -197,35 +197,37 @@ sudo chown 999:999 ./data
 
 #### Environment variables
 
-| Variable                         | Description                                                                                                             | Type         | Default value              |
-| -------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------ | -------------------------- |
-| **ALLOW_REGISTRATION**           | Whether to allow registration of new accounts via Jabber clients                                                        | _optional_   | true                       |
-| **DOMAIN**                       | domain                                                                                                                  | **required** | null                       |
-| **DOMAIN_HTTP_UPLOAD**           | Domain which lets clients upload files over HTTP                                                                        | _optional_   | upload.**DOMAIN**          |
-| **DOMAIN_MUC**                   | Domain for Multi-user chat (MUC) for allowing you to create hosted chatrooms/conferences for XMPP users                 | _optional_   | conference.**DOMAIN**      |
-| **DOMAIN_PROXY**                 | Domain for SOCKS5 bytestream proxy for server-proxied file transfers                                                    | _optional_   | proxy.**DOMAIN**           |
-| **DOMAIN_PUBSUB**                | Domain for a XEP-0060 pubsub service                                                                                    | _optional_   | pubsub.**DOMAIN**          |
-| **DB_DRIVER**                    | May also be "PostgreSQL" or "MySQL" or "SQLite3" (case sensitive!)                                                      | _optional_   | SQLite3                    |
-| **DB_DATABASE**                  | The database name to use. For SQLite3 this the database filename (relative to the data storage directory).              | _optional_   | prosody.sqlite             |
-| **DB_HOST**                      | The address of the database server                                                                                      | _optional_   |                            |
-| **DB_PORT**                      | Port on which the database is listening                                                                                 | _optional_   |                            |
-| **DB_USERNAME**                  | The username to authenticate to the database                                                                            | _optional_   |                            |
-| **DB_PASSWORD**                  | The password to authenticate to the database                                                                            | _optional_   |                            |
-| **E2E_POLICY_CHAT**              | Policy for chat messages. Possible values: "none", "optional" and "required".                                           | _optional_   | "required"                 |
-| **E2E_POLICY_MUC**               | Policy for MUC messages. Possible values: "none", "optional" and "required".                                            | _optional_   | "required"                 |
-| **E2E_POLICY_WHITELIST**         | Make this module ignore messages sent to and from this JIDs or MUCs.                                                    | _optional_   | ""                         |
-| **LOG_LEVEL**                    | Min log level. Change to debug for more information                                                                     | _optional_   | info                       |
-| **C2S_REQUIRE_ENCRYPTION**       | Whether to force all client-to-server connections to be encrypted or not                                                | _optional_   | true                       |
-| **S2S_REQUIRE_ENCRYPTION**       | Whether to force all server-to-server connections to be encrypted or not                                                | _optional_   | true                       |
-| **S2S_SECURE_AUTH**              | Require encryption and certificate authentication                                                                       | _optional_   | true                       |
-| **SERVER_CONTACT_INFO_ABUSE**    | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info).    | _optional_   | "xmpp:abuse@**DOMAIN**"    |
-| **SERVER_CONTACT_INFO_ADMIN**    | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info).    | _optional_   | "xmpp:admin@**DOMAIN**"    |
-| **SERVER_CONTACT_INFO_FEEDBACK** | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info).    | _optional_   | "xmpp:feedback@**DOMAIN**" |
-| **SERVER_CONTACT_INFO_SALES**    | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info).    | _optional_   | "xmpp:sales@**DOMAIN**"    |
-| **SERVER_CONTACT_INFO_SECURITY** | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info).    | _optional_   | "xmpp:security@**DOMAIN**" |
-| **SERVER_CONTACT_INFO_SUPPORT**  | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info).    | _optional_   | "xmpp:support@**DOMAIN**"  |
-| **PROSODY_ADMINS**               | Specify who is an administrator. List of adresses. Eg. "me@example.com", "admin@example.net"                            | _optional_   | ""                         |
-| **STORAGE**                      | Select the storage backend to load with the 'storage' configuration option. See [here](https://prosody.im/doc/storage). | _optional_   | "sql"                      |
+| Variable                         | Description                                                                                                                      | Type         | Default value              |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------ | -------------------------- |
+| **ALLOW_REGISTRATION**           | Whether to allow registration of new accounts via Jabber clients                                                                 | _optional_   | true                       |
+| **DOMAIN**                       | domain                                                                                                                           | **required** | null                       |
+| **DOMAIN_HTTP_UPLOAD**           | Domain which lets clients upload files over HTTP                                                                                 | _optional_   | upload.**DOMAIN**          |
+| **DOMAIN_MUC**                   | Domain for Multi-user chat (MUC) for allowing you to create hosted chatrooms/conferences for XMPP users                          | _optional_   | conference.**DOMAIN**      |
+| **DOMAIN_PROXY**                 | Domain for SOCKS5 bytestream proxy for server-proxied file transfers                                                             | _optional_   | proxy.**DOMAIN**           |
+| **DOMAIN_PUBSUB**                | Domain for a XEP-0060 pubsub service                                                                                             | _optional_   | pubsub.**DOMAIN**          |
+| **DB_DRIVER**                    | May also be "PostgreSQL" or "MySQL" or "SQLite3" (case sensitive!)                                                               | _optional_   | SQLite3                    |
+| **DB_DATABASE**                  | The database name to use. For SQLite3 this the database filename (relative to the data storage directory).                       | _optional_   | prosody.sqlite             |
+| **DB_HOST**                      | The address of the database server                                                                                               | _optional_   |                            |
+| **DB_PORT**                      | Port on which the database is listening                                                                                          | _optional_   |                            |
+| **DB_USERNAME**                  | The username to authenticate to the database                                                                                     | _optional_   |                            |
+| **DB_PASSWORD**                  | The password to authenticate to the database                                                                                     | _optional_   |                            |
+| **E2E_POLICY_CHAT**              | Policy for chat messages. Possible values: "none", "optional" and "required".                                                    | _optional_   | "required"                 |
+| **E2E_POLICY_MUC**               | Policy for MUC messages. Possible values: "none", "optional" and "required".                                                     | _optional_   | "required"                 |
+| **E2E_POLICY_WHITELIST**         | Make this module ignore messages sent to and from this JIDs or MUCs.                                                             | _optional_   | ""                         |
+| **LOG_LEVEL**                    | Min log level. Change to debug for more information                                                                              | _optional_   | info                       |
+| **C2S_REQUIRE_ENCRYPTION**       | Whether to force all client-to-server connections to be encrypted or not                                                         | _optional_   | true                       |
+| **S2S_REQUIRE_ENCRYPTION**       | Whether to force all server-to-server connections to be encrypted or not                                                         | _optional_   | true                       |
+| **S2S_SECURE_AUTH**              | Require encryption and certificate authentication                                                                                | _optional_   | true                       |
+| **SERVER_CONTACT_INFO_ABUSE**    | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info).             | _optional_   | "xmpp:abuse@**DOMAIN**"    |
+| **SERVER_CONTACT_INFO_ADMIN**    | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info).             | _optional_   | "xmpp:admin@**DOMAIN**"    |
+| **SERVER_CONTACT_INFO_FEEDBACK** | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info).             | _optional_   | "xmpp:feedback@**DOMAIN**" |
+| **SERVER_CONTACT_INFO_SALES**    | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info).             | _optional_   | "xmpp:sales@**DOMAIN**"    |
+| **SERVER_CONTACT_INFO_SECURITY** | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info).             | _optional_   | "xmpp:security@**DOMAIN**" |
+| **SERVER_CONTACT_INFO_SUPPORT**  | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info).             | _optional_   | "xmpp:support@**DOMAIN**"  |
+| **PROSODY_ADMINS**               | Specify who is an administrator. List of adresses. Eg. "me@example.com", "admin@example.net"                                     | _optional_   | ""                         |
+| **DEFAULT_STORAGE**              | Select the storage backend to load with the 'storage' configuration option. See [here](https://prosody.im/doc/storage).          | _optional_   | "sql"                      |
+| **ARCHIVE_STORE**                | Select the archive store. 'archive' or 'archive2'. See [here](https://prosody.im/doc/storage).                                   | _optional_   | "archive2"                 |
+| **STORAGE_ARCHIVE2**             | Select the storage backend to load with the 'storage.archive2' configuration option. See [here](https://prosody.im/doc/storage). | _optional_   | "sql"                      |
 
 #### DNS
 

@@ -86,3 +86,8 @@ load 'bats/bats-assert/load'
   assert_success
   assert_output
 }
+
+@test "Should not have any sql errors" {
+  run bash -c "sudo docker-compose logs $batsContainerName | grep --ignore-case Error in SQL transaction"
+  assert_failure
+}
