@@ -13,6 +13,7 @@
   This fixes [#38](https://github.com/SaraSmiseth/prosody/issues/38).
 - New tests for a container with DEFAULT_STORAGE set to `internal`.
   New tests for a container with DEFAULT_STORAGE set to `internal` and ARCHIVE_STORE set to `archive`.
+- Updated luarocks to version 3.9.1.
 
 ## v1.2.8
 
