@@ -64,8 +64,20 @@ registerTestUsers prosody_postgres
 runTests prosody_postgres
 sudo docker-compose down
 
-# Run tests for second container with SQLite
+# Run tests for container with SQLite
 sudo docker-compose up -d prosody
 registerTestUsers prosody
 runTests prosody
+sudo docker-compose down
+
+# Run tests for container with internal storage and archive store archive2
+sudo docker-compose up -d prosody_internal_storage
+registerTestUsers prosody_internal_storage
+runTests prosody_internal_storage
+sudo docker-compose down
+
+# Run tests for container with internal storage and archive store archive
+sudo docker-compose up -d prosody_internal_storage_archive
+registerTestUsers prosody_internal_storage_archive
+runTests prosody_internal_storage_archive
 sudo docker-compose down

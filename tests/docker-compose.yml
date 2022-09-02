@@ -18,6 +18,44 @@ services:
     volumes:
       - ./certs:/usr/local/etc/prosody/certs
 
+  prosody_internal_storage:
+    image: prosody
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+      - "5222:5222"
+      - "5223:5223"
+      - "5269:5269"
+      - "5281:5281"
+    environment:
+      DOMAIN: localhost
+      E2E_POLICY_WHITELIST: "admin@localhost, user1@localhost"
+      LOG_LEVEL: debug
+      PROSODY_ADMINS: "admin@localhost, admin2@localhost"
+      DEFAULT_STORAGE: "internal"
+      STORAGE_ARCHIVE2: "internal"
+    volumes:
+      - ./certs:/usr/local/etc/prosody/certs
+
+  prosody_internal_storage_archive:
+    image: prosody
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+      - "5222:5222"
+      - "5223:5223"
+      - "5269:5269"
+      - "5281:5281"
+    environment:
+      DOMAIN: localhost
+      E2E_POLICY_WHITELIST: "admin@localhost, user1@localhost"
+      LOG_LEVEL: debug
+      PROSODY_ADMINS: "admin@localhost, admin2@localhost"
+      DEFAULT_STORAGE: "internal"
+      ARCHIVE_STORE: "archive"
+    volumes:
+      - ./certs:/usr/local/etc/prosody/certs
+
   prosody_postgres:
     image: prosody
     restart: unless-stopped
@@ -45,7 +83,7 @@ services:
       - postgres
 
   postgres:
-    image: postgres:13-alpine
+    image: postgres:14-alpine
     restart: unless-stopped
     environment:
       POSTGRES_DB: prosody
