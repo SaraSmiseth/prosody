@@ -18,6 +18,7 @@ generateCert() {
 registerTestUser() {
     local userName="$1"
     local containerName="$2"
+    echo "Registering TestUser '$userName' in container '$containerName'"
     sudo docker compose exec "$containerName" /bin/bash -c "/entrypoint.bash register $userName localhost 12345678"
 }
 
