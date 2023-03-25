@@ -35,6 +35,7 @@ RUN apt-get update \
       lua-dbi-mysql \
       lua-expat \
       lua-filesystem \
+      lua-ldap \
       lua-socket \
       lua-sec \
       lua-unbound \

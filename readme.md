@@ -197,34 +197,44 @@ sudo chown 999:999 ./data
 
 #### Environment variables
 
-| Variable                         | Description                                                                                                          | Type         | Default value              |
-| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------------ | -------------------------- |
-| **ALLOW_REGISTRATION**           | Whether to allow registration of new accounts via Jabber clients                                                     | *optional*   | true                       |
-| **DOMAIN**                       | domain                                                                                                               | **required** | null                       |
-| **DOMAIN_HTTP_UPLOAD**           | Domain which lets clients upload files over HTTP                                                                     | *optional*   | upload.**DOMAIN**          |
-| **DOMAIN_MUC**                   | Domain for Multi-user chat (MUC) for allowing you to create hosted chatrooms/conferences for XMPP users              | *optional*   | conference.**DOMAIN**      |
-| **DOMAIN_PROXY**                 | Domain for SOCKS5 bytestream proxy for server-proxied file transfers                                                 | *optional*   | proxy.**DOMAIN**           |
-| **DOMAIN_PUBSUB**                | Domain for a XEP-0060 pubsub service                                                                                 | *optional*   | pubsub.**DOMAIN**          |
-| **DB_DRIVER**                    | May also be "PostgreSQL" or "MySQL" or "SQLite3" (case sensitive!)                                                   | *optional*   | SQLite3                    |
-| **DB_DATABASE**                  | The database name to use. For SQLite3 this the database filename (relative to the data storage directory).           | *optional*   | prosody.sqlite             |
-| **DB_HOST**                      | The address of the database server                                                                                   | *optional*   |                            |
-| **DB_PORT**                      | Port on which the database is listening                                                                              | *optional*   |                            |
-| **DB_USERNAME**                  | The username to authenticate to the database                                                                         | *optional*   |                            |
-| **DB_PASSWORD**                  | The password to authenticate to the database                                                                         | *optional*   |                            |
-| **E2E_POLICY_CHAT**              | Policy for chat messages. Possible values: "none", "optional" and "required".                                        | *optional*   | "required"                 |
-| **E2E_POLICY_MUC**               | Policy for MUC messages. Possible values: "none", "optional" and "required".                                         | *optional*   | "required"                 |
-| **E2E_POLICY_WHITELIST**         | Make this module ignore messages sent to and from this JIDs or MUCs.                                                 | *optional*   | ""                         |
-| **LOG_LEVEL**                    | Min log level. Change to debug for more information                                                                  | *optional*   | info                       |
-| **C2S_REQUIRE_ENCRYPTION**       | Whether to force all client-to-server connections to be encrypted or not                                             | *optional*   | true                       |
-| **S2S_REQUIRE_ENCRYPTION**       | Whether to force all server-to-server connections to be encrypted or not                                             | *optional*   | true                       |
-| **S2S_SECURE_AUTH**              | Require encryption and certificate authentication                                                                    | *optional*   | true                       |
-| **SERVER_CONTACT_INFO_ABUSE**    | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info). | *optional*   | "xmpp:abuse@**DOMAIN**"    |
-| **SERVER_CONTACT_INFO_ADMIN**    | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info). | *optional*   | "xmpp:admin@**DOMAIN**"    |
-| **SERVER_CONTACT_INFO_FEEDBACK** | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info). | *optional*   | "xmpp:feedback@**DOMAIN**" |
-| **SERVER_CONTACT_INFO_SALES**    | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info). | *optional*   | "xmpp:sales@**DOMAIN**"    |
-| **SERVER_CONTACT_INFO_SECURITY** | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info). | *optional*   | "xmpp:security@**DOMAIN**" |
-| **SERVER_CONTACT_INFO_SUPPORT**  | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info). | *optional*   | "xmpp:support@**DOMAIN**"  |
-| **PROSODY_ADMINS**               | Specify who is an administrator. List of adresses. Eg. "me@example.com", "admin@example.net"                         | *optional*   | ""                         |
+| Variable                         | Description                                                                                                          | Type                                         | Default value              |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- | -------------------------- |
+| **ALLOW_REGISTRATION**           | Whether to allow registration of new accounts via Jabber clients                                                     | *optional*                                   | true                       |
+| **DOMAIN**                       | domain                                                                                                               | **required**                                 | null                       |
+| **DOMAIN_HTTP_UPLOAD**           | Domain which lets clients upload files over HTTP                                                                     | *optional*                                   | upload.**DOMAIN**          |
+| **DOMAIN_MUC**                   | Domain for Multi-user chat (MUC) for allowing you to create hosted chatrooms/conferences for XMPP users              | *optional*                                   | conference.**DOMAIN**      |
+| **DOMAIN_PROXY**                 | Domain for SOCKS5 bytestream proxy for server-proxied file transfers                                                 | *optional*                                   | proxy.**DOMAIN**           |
+| **DOMAIN_PUBSUB**                | Domain for a XEP-0060 pubsub service                                                                                 | *optional*                                   | pubsub.**DOMAIN**          |
+| **AUTHENTICATION**               | authentication                                                                                                       | *optional*                                   | "internal_hashed"          |
+| **LDAP_BASE**                    | LDAP base directory which stores user accounts                                                                       | **required** if **AUTHENTICATION** is "ldap" |                            |
+| **LDAP_SERVER**                  | Space-separated list of hostnames or IPs, optionally with port numbers (e.g. “localhost:8389”)                       | *optional*                                   | "localhost"                |
+| **LDAP_ROOTDN**                  | The distinguished name to auth against                                                                               | *optional*                                   | ""                         |
+| **LDAP_PASSWORD**                | Password for rootdn                                                                                                  | *optional*                                   | ""                         |
+| **LDAP_FILTER**                  | Search filter, with $user and $host substituted for user- and hostname                                               | *optional*                                   | "(uid=$user)"              |
+| **LDAP_SCOPE**                   | Search scope. other values: “base” and “onelevel”                                                                    | *optional*                                   | "subtree"                  |
+| **LDAP_TLS**                     | Enable TLS (StartTLS) to connect to LDAP (can be true or false). The non-standard ‘LDAPS’ protocol is not supported. | *optional*                                   | "false"                    |
+| **LDAP_MODE**                    | How passwords are validated.                                                                                         | *optional*                                   | "bind"                     |
+| **LDAP_ADMIN_FILTER**            | Search filter to match admins, works like ldap_filter                                                                | *optional*                                   | ""                         |
+| **DB_DRIVER**                    | May also be "PostgreSQL" or "MySQL" or "SQLite3" (case sensitive!)                                                   | *optional*                                   | SQLite3                    |
+| **DB_DATABASE**                  | The database name to use. For SQLite3 this the database filename (relative to the data storage directory).           | *optional*                                   | prosody.sqlite             |
+| **DB_HOST**                      | The address of the database server                                                                                   | *optional*                                   |                            |
+| **DB_PORT**                      | Port on which the database is listening                                                                              | *optional*                                   |                            |
+| **DB_USERNAME**                  | The username to authenticate to the database                                                                         | *optional*                                   |                            |
+| **DB_PASSWORD**                  | The password to authenticate to the database                                                                         | *optional*                                   |                            |
+| **E2E_POLICY_CHAT**              | Policy for chat messages. Possible values: "none", "optional" and "required".                                        | *optional*                                   | "required"                 |
+| **E2E_POLICY_MUC**               | Policy for MUC messages. Possible values: "none", "optional" and "required".                                         | *optional*                                   | "required"                 |
+| **E2E_POLICY_WHITELIST**         | Make this module ignore messages sent to and from this JIDs or MUCs.                                                 | *optional*                                   | ""                         |
+| **LOG_LEVEL**                    | Min log level. Change to debug for more information                                                                  | *optional*                                   | info                       |
+| **C2S_REQUIRE_ENCRYPTION**       | Whether to force all client-to-server connections to be encrypted or not                                             | *optional*                                   | true                       |
+| **S2S_REQUIRE_ENCRYPTION**       | Whether to force all server-to-server connections to be encrypted or not                                             | *optional*                                   | true                       |
+| **S2S_SECURE_AUTH**              | Require encryption and certificate authentication                                                                    | *optional*                                   | true                       |
+| **SERVER_CONTACT_INFO_ABUSE**    | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info). | *optional*                                   | "xmpp:abuse@**DOMAIN**"    |
+| **SERVER_CONTACT_INFO_ADMIN**    | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info). | *optional*                                   | "xmpp:admin@**DOMAIN**"    |
+| **SERVER_CONTACT_INFO_FEEDBACK** | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info). | *optional*                                   | "xmpp:feedback@**DOMAIN**" |
+| **SERVER_CONTACT_INFO_SALES**    | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info). | *optional*                                   | "xmpp:sales@**DOMAIN**"    |
+| **SERVER_CONTACT_INFO_SECURITY** | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info). | *optional*                                   | "xmpp:security@**DOMAIN**" |
+| **SERVER_CONTACT_INFO_SUPPORT**  | A list of strings. Each string should be an URI. See [here](https://prosody.im/doc/modules/mod_server_contact_info). | *optional*                                   | "xmpp:support@**DOMAIN**"  |
+| **PROSODY_ADMINS**               | Specify who is an administrator. List of adresses. Eg. "me@example.com", "admin@example.net"                         | *optional*                                   | ""                         |
 
 #### DNS
 
