@@ -15,6 +15,7 @@ def client(client_username, password):
             password,
             no_verify=True
         ),
+        override_peer=[("localhost", 5222, aioxmpp.connector.STARTTLSConnector())],
     )
     return client
 
@@ -39,9 +40,9 @@ def client_with_message_dispatcher(client):
     return client
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize("client_username, password", [("admin@localhost", "12345678")])
+@pytest.mark.parametrize("client_username, password", [("admin@example.com", "12345678")])
 async def test_send_message_from_admin_to_user1(client):
-    recipient_jid = aioxmpp.JID.fromstr("user1@localhost")
+    recipient_jid = aioxmpp.JID.fromstr("user1@example.com")
     async with client.connected() as stream:
         msg = aioxmpp.Message(
             to=recipient_jid,
@@ -53,9 +54,9 @@ async def test_send_message_from_admin_to_user1(client):
         await client.send(msg)
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize("client_username, password", [("admin@localhost", "12345678")])
+@pytest.mark.parametrize("client_username, password", [("admin@example.com", "12345678")])
 async def test_send_message_from_admin_to_user2(client):
-    recipient_jid = aioxmpp.JID.fromstr("user2@localhost")
+    recipient_jid = aioxmpp.JID.fromstr("user2@example.com")
     async with client.connected() as stream:
         msg = aioxmpp.Message(
             to=recipient_jid,
@@ -66,9 +67,9 @@ async def test_send_message_from_admin_to_user2(client):
         await client.send(msg)
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize("client_username, password", [("user1@localhost", "12345678")])
+@pytest.mark.parametrize("client_username, password", [("user1@example.com", "12345678")])
 async def test_send_message_from_user1_to_user2(client):
-    recipient_jid = aioxmpp.JID.fromstr("user2@localhost")
+    recipient_jid = aioxmpp.JID.fromstr("user2@example.com")
     async with client.connected() as stream:
         msg = aioxmpp.Message(
             to=recipient_jid,
@@ -79,9 +80,9 @@ async def test_send_message_from_user1_to_user2(client):
         await client.send(msg)
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize("client_username, password", [("user2@localhost", "12345678")])
+@pytest.mark.parametrize("client_username, password", [("user2@example.com", "12345678")])
 async def test_send_message_from_user2_to_user3(client):
-    recipient_jid = aioxmpp.JID.fromstr("user3@localhost")
+    recipient_jid = aioxmpp.JID.fromstr("user3@example.com")
     async with client.connected() as stream:
         msg = aioxmpp.Message(
             to=recipient_jid,
@@ -92,9 +93,9 @@ async def test_send_message_from_user2_to_user3(client):
         await client.send(msg)
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize("client_username, password", [("user2@localhost", "12345678")])
+@pytest.mark.parametrize("client_username, password", [("user2@example.com", "12345678")])
 async def test_send_message_from_user2_to_nonexisting(client):
-    recipient_jid = aioxmpp.JID.fromstr("nonexisting@localhost")
+    recipient_jid = aioxmpp.JID.fromstr("nonexisting@example.com")
     async with client.connected() as stream:
         msg = aioxmpp.Message(
             to=recipient_jid,
@@ -105,10 +106,10 @@ async def test_send_message_from_user2_to_nonexisting(client):
         await client.send(msg)
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize("client_username, password", [("user2@localhost", "wrong password")])
+@pytest.mark.parametrize("client_username, password", [("user2@example.com", "wrong password")])
 async def test_can_not_log_in_with_wrong_password(client):
     with pytest.raises(aiosasl.AuthenticationFailure):
-        recipient_jid = aioxmpp.JID.fromstr("nonexisting@localhost")
+        recipient_jid = aioxmpp.JID.fromstr("nonexisting@example.com")
         async with client.connected() as stream:
             msg = aioxmpp.Message(
                 to=recipient_jid,

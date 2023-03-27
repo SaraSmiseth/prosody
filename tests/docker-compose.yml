@@ -1,4 +1,4 @@
-version: '3.9'
+version: "3.9"
 
 services:
   prosody:
@@ -11,10 +11,10 @@ services:
       - "5269:5269"
       - "5281:5281"
     environment:
-      DOMAIN: localhost
-      E2E_POLICY_WHITELIST: "admin@localhost, user1@localhost"
+      DOMAIN: example.com
+      E2E_POLICY_WHITELIST: "admin@example.com, user1@example.com"
       LOG_LEVEL: debug
-      PROSODY_ADMINS: "admin@localhost, admin2@localhost"
+      PROSODY_ADMINS: "admin@example.com, admin2@example.com"
     volumes:
       - ./certs:/usr/local/etc/prosody/certs
 
@@ -28,10 +28,10 @@ services:
       - "5269:5269"
       - "5281:5281"
     environment:
-      DOMAIN: localhost
-      E2E_POLICY_WHITELIST: "admin@localhost, user1@localhost"
+      DOMAIN: example.com
+      E2E_POLICY_WHITELIST: "admin@example.com, user1@example.com"
       LOG_LEVEL: debug
-      PROSODY_ADMINS: "admin@localhost, admin2@localhost"
+      PROSODY_ADMINS: "admin@example.com, admin2@example.com"
       #DB_DRIVER: "MySQL"
       DB_DRIVER: "PostgreSQL"
       DB_DATABASE: "prosody"
@@ -45,9 +45,38 @@ services:
       - postgres
 
   postgres:
-    image: postgres:13-alpine
+    image: postgres:15-alpine
     restart: unless-stopped
     environment:
       POSTGRES_DB: prosody
       POSTGRES_USER: prosody
       POSTGRES_PASSWORD: prosody
+
+  prosody_ldap:
+    image: prosody
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+      - "5222:5222"
+      - "5223:5223"
+      - "5269:5269"
+      - "5281:5281"
+    environment:
+      DOMAIN: example.com
+      E2E_POLICY_WHITELIST: "alice@example.com, bob@example.com"
+      LOG_LEVEL: debug
+      PROSODY_ADMINS: "admin@example.com, admin2@example.com"
+      AUTHENTICATION: "ldap"
+      LDAP_BASE: "dc=example,dc=com"
+      LDAP_SERVER: "glauth"
+      LDAP_ROOTDN: "cn=svc,dc=example,dc=com"
+      LDAP_PASSWORD: "12345678"
+    volumes:
+      - ./certs:/usr/local/etc/prosody/certs
+    depends_on:
+      - glauth
+
+  glauth:
+    image: glauth/glauth
+    volumes:
+      - "./glauth/config.cfg:/app/config/config.cfg"

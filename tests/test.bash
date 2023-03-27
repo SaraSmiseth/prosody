@@ -5,7 +5,7 @@ set -e
 # generate certs for testing
 
 generateCert() {
-    DOMAIN="$1"
+    local DOMAIN="$1"
     if [[ ! -d certs/"$DOMAIN" ]] ; then
         mkdir -p certs/"$DOMAIN"
         cd certs/"$DOMAIN"
@@ -19,7 +19,7 @@ registerTestUser() {
     local userName="$1"
     local containerName="$2"
     echo "Registering TestUser '$userName' in container '$containerName'"
-    sudo docker compose exec "$containerName" /bin/bash -c "/entrypoint.bash register $userName localhost 12345678"
+    sudo docker compose exec "$containerName" /bin/bash -c "/entrypoint.bash register $userName example.com 12345678"
 }
 
 registerTestUsers() {
@@ -48,18 +48,18 @@ runTests() {
     && ./bats/bats-core/bin/bats tests-"$containerName".bats
 }
 
-generateCert "localhost"
-generateCert "conference.localhost"
-generateCert "proxy.localhost"
-generateCert "pubsub.localhost"
-generateCert "upload.localhost"
+generateCert "example.com"
+generateCert "conference.example.com"
+generateCert "proxy.example.com"
+generateCert "pubsub.example.com"
+generateCert "upload.example.com"
 
 # Run tests for first container with postgres
 # Start postgres first and wait for 10 seconds before starting prosody.
-sudo docker-compose down \
-&& sudo docker-compose up -d postgres \
-&& sleep 10 \
-&& sudo docker-compose up -d prosody_postgres
+sudo docker-compose down
+sudo docker-compose up -d postgres
+sleep 10
+sudo docker-compose up -d prosody_postgres
 
 registerTestUsers prosody_postgres
 runTests prosody_postgres
@@ -69,4 +69,9 @@ sudo docker-compose down
 sudo docker-compose up -d prosody
 registerTestUsers prosody
 runTests prosody
+sudo docker-compose down
+
+# Run tests for prosody with ldap
+sudo docker-compose up -d prosody_ldap
+runTests prosody_ldap
 sudo docker-compose down

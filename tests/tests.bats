@@ -9,32 +9,32 @@ load 'bats/bats-assert/load'
   assert_output "5"
 }
 
-@test "Should select certificate for localhost" {
-  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Certificates loaded\" | grep \" localhost:tls\" | wc -l"
+@test "Should select certificate for example.com" {
+  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Certificates loaded\" | grep \" example.com:tls\" | wc -l"
   assert_success
   assert_output "1"
 }
 
-@test "Should select certificate for conference.localhost" {
-  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Certificates loaded\" | grep \"conference.localhost:tls\" | wc -l"
+@test "Should select certificate for conference.example.com" {
+  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Certificates loaded\" | grep \"conference.example.com:tls\" | wc -l"
   assert_success
   assert_output "1"
 }
 
-@test "Should select certificate for proxy.localhost" {
-  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Certificates loaded\" | grep \"proxy.localhost:tls\" | wc -l"
+@test "Should select certificate for proxy.example.com" {
+  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Certificates loaded\" | grep \"proxy.example.com:tls\" | wc -l"
   assert_success
   assert_output "1"
 }
 
-@test "Should select certificate for pubsub.localhost" {
-  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Certificates loaded\" | grep \"pubsub.localhost:tls\" | wc -l"
+@test "Should select certificate for pubsub.example.com" {
+  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Certificates loaded\" | grep \"pubsub.example.com:tls\" | wc -l"
   assert_success
   assert_output "1"
 }
 
-@test "Should select certificate for upload.localhost" {
-  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Certificates loaded\" | grep \"upload.localhost:tls\" | wc -l"
+@test "Should select certificate for upload.example.com" {
+  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Certificates loaded\" | grep \"upload.example.com:tls\" | wc -l"
   assert_success
   assert_output "1"
 }
@@ -76,13 +76,13 @@ load 'bats/bats-assert/load'
 }
 
 @test "Should load module cloud_notify" {
-  run bash -c "sudo docker-compose logs $batsContainerName | grep \"localhost:cloud_notify.*info.*Module loaded\""
+  run bash -c "sudo docker-compose logs $batsContainerName | grep \"example.com:cloud_notify.*info.*Module loaded\""
   assert_success
   assert_output
 }
 
 @test "Should show upload URL" {
-  run bash -c "sudo docker-compose logs $batsContainerName | grep \"URL: <https:\/\/upload.localhost:5281\/upload> - Ensure this can be reached by users\""
+  run bash -c "sudo docker-compose logs $batsContainerName | grep \"URL: <https:\/\/upload.example.com:5281\/upload> - Ensure this can be reached by users\""
   assert_success
   assert_output
 }
