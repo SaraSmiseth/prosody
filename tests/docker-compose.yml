@@ -63,7 +63,7 @@ services:
       - "5281:5281"
     environment:
       DOMAIN: example.com
-      E2E_POLICY_WHITELIST: "alice@example.com, bob@example.com"
+      E2E_POLICY_WHITELIST: "admin@example.com, user1@example.com"
       LOG_LEVEL: debug
       PROSODY_ADMINS: "admin@example.com, admin2@example.com"
       AUTHENTICATION: "ldap"
