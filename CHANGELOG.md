@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-* Nothing
+* Update to debian bookworm
 
 ## v1.2.8
 
