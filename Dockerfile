@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -7,7 +7,7 @@ ARG VERSION
 ARG LUAROCKS_VERSION=3.9.2
 ARG PROSODY_VERSION=0.12.3
 
-ARG LUAROCKS_SHA256=bca6e4ecc02c203e070acdb5f586045d45c078896f6236eb46aa33ccd9b94edb
+ARG LUAROCKS_SHA256="bca6e4ecc02c203e070acdb5f586045d45c078896f6236eb46aa33ccd9b94edb"
 ARG PROSODY_DOWNLOAD_SHA256=35da0d031ff46040a2d638e004d4255e249b6323fe6212db9ddd76b401db2101
 
 LABEL luarocks.version="${LUAROCKS_VERSION}"
@@ -26,13 +26,14 @@ LABEL prosody.version="${PROSODY_VERSION}"
 RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y \
       libevent-dev `# this is no build dependency, but needed for luaevent` \
-      libicu67 \
-      libidn11 \
+      libicu72 \
+      libidn2-0 \
       libpq-dev \
       libsqlite3-0 \
       lua5.2 \
       lua-bitop \
       lua-dbi-mysql \
+      lua-dbi-postgresql \
       lua-expat \
       lua-filesystem \
       lua-ldap \
@@ -43,7 +44,7 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-RUN buildDeps='gcc git libc6-dev libidn11-dev liblua5.2-dev libsqlite3-dev libssl-dev libicu-dev make unzip' \
+RUN buildDeps='gcc git libc6-dev libidn2-dev liblua5.2-dev libsqlite3-dev libssl-dev libicu-dev make unzip' \
  && set -x \
  && apt-get update && apt-get install -y $buildDeps --no-install-recommends \
  && rm -rf /var/lib/apt/lists/* \
@@ -71,7 +72,6 @@ RUN buildDeps='gcc git libc6-dev libidn11-dev liblua5.2-dev libsqlite3-dev libss
  && luarocks install luaevent \
  && luarocks install luadbi \
  `#&& luarocks install luadbi-mysql MYSQL_INCDIR=/usr/include/mariadb/` \
- && luarocks install luadbi-postgresql POSTGRES_INCDIR=/usr/include/postgresql/ \
  && luarocks install luadbi-sqlite3 \
  && luarocks install stringy \
  \
