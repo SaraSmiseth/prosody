@@ -3,6 +3,13 @@
 ## Unreleased
 
 * Update to debian bookworm
+* [Add LDAP authentication support](https://github.com/SaraSmiseth/prosody/pull/50)
+* Add environment variable HTTP_UPLOAD_FILE_SIZE_LIMIT for setting http_upload_file_size_limit.
+
+## v1.2.9
+
+* Update prosody to version 0.12.3
+* Update luarocks to version 3.9.2
 
 ## v1.2.8
 
