@@ -20,6 +20,9 @@ https_ssl = {
 }
 
 VirtualHost (domain)
+disco_items = {
+    { domain_http_upload },
+}
 
 -- Set up a http file upload because proxy65 is not working in muc
 Component (domain_http_upload) "http_upload"

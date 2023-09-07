@@ -20,3 +20,4 @@ storage = {
 -- https://modules.prosody.im/mod_mam.html
 archive_expires_after = "1y"
 
+http_max_content_size = os.getenv("HTTP_MAX_CONTENT_SIZE") or 1024 * 1024 * 10 -- Default is 10MB
