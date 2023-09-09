@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## v1.2.11
+
+* Updated to Prosody version [0.12.4](https://blog.prosody.im/prosody-0.12.4-released/)
+
 ## v1.2.10
 
 * Update docker base image to debian bookworm
