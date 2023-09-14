@@ -82,7 +82,7 @@ load 'bats/bats-assert/load'
 }
 
 @test "Should show upload URL" {
-  run bash -c "sudo docker-compose logs $batsContainerName | grep \"URL: <https:\/\/upload.example.com:5281\/upload> - Ensure this can be reached by users\""
+  run bash -c "sudo docker-compose logs $batsContainerName | grep \"Serving 'file_share' at https:\/\/upload.example.com:5281\/file_share\""
   assert_success
   assert_output
 }

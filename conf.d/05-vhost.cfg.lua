@@ -25,9 +25,11 @@ disco_items = {
 }
 
 -- Set up a http file upload because proxy65 is not working in muc
-Component (domain_http_upload) "http_upload"
-	http_upload_expire_after = 60 * 60 * 24 * 7 -- a week in seconds
-	http_upload_file_size_limit = os.getenv("HTTP_UPLOAD_FILE_SIZE_LIMIT") or 1024 * 1024 -- Default is 1MB
+Component (domain_http_upload) "http_file_share"
+	http_file_share_expires_after = 60 * 60 * 24 * 7 -- a week in seconds
+	local size_limit = os.getenv("HTTP_FILE_SHARE_SIZE_LIMIT") or 10 * 1024 * 1024 -- Default is 10MB
+	http_file_share_size_limit = size_limit
+	http_file_share_daily_quota = os.getenv("HTTP_FILE_SHARE_DAILY_QUOTA") or 10 * size_limit -- Default is 10x the size limit
 
 Component (domain_muc) "muc"
 	name = "Prosody Chatrooms"

@@ -2,9 +2,22 @@
 
 ## Unreleased
 
-## v1.2.11
+## v1.3.0
 
 * Updated to Prosody version [0.12.4](https://blog.prosody.im/prosody-0.12.4-released/)
+
+### Breaking Change
+
+Switched from [http_upload](https://modules.prosody.im/mod_http_upload) to [http_file_share](https://prosody.im/doc/modules/mod_http_file_share).
+This means that previous uploads will NOT work after upgrading.
+ENV variable `HTTP_UPLOAD_FILE_SIZE_LIMIT` was removed.
+
+The new module uses the following variables:
+
+* HTTP_FILE_SHARE_SIZE_LIMIT
+* HTTP_FILE_SHARE_DAILY_QUOTA
+
+See [readme.md](readme.md) for explanations and defaults.
 
 ## v1.2.10
 
