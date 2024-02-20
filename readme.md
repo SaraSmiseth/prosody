@@ -2,8 +2,6 @@
 
 ![Docker](https://github.com/SaraSmiseth/prosody/workflows/Docker/badge.svg?branch=dev)
 ![Git repository size](https://img.shields.io/github/repo-size/SaraSmiseth/prosody)
-[![Docker image](https://images.microbadger.com/badges/image/sarasmiseth/prosody:latest.svg)](https://microbadger.com/images/sarasmiseth/prosody:latest)
-[![Docker version](https://images.microbadger.com/badges/version/sarasmiseth/prosody.svg)](https://microbadger.com/images/sarasmiseth/prosody:latest)
 [![Docker pulls](https://img.shields.io/docker/pulls/sarasmiseth/prosody.svg)](https://hub.docker.com/r/sarasmiseth/prosody/)
 [![Docker stars](https://img.shields.io/docker/stars/sarasmiseth/prosody.svg)](https://hub.docker.com/r/sarasmiseth/prosody/)
 [![Github open issues](https://img.shields.io/github/issues-raw/SaraSmiseth/prosody)](https://github.com/SaraSmiseth/prosody/issues)
