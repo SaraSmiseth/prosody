@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Adjust config
+
+* Replace deprecated legacy_ssl with c2s_direct_tls.
+* Removed use_libevent = true. This means the default is now used which is epoll.
+
+### Test
+
+Added a test to check that no deprecated config settings are used.
+
 ## v1.3.0
 
 * Updated to Prosody version [0.12.4](https://blog.prosody.im/prosody-0.12.4-released/)

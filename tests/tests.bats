@@ -57,8 +57,8 @@ load 'bats/bats-assert/load'
   assert_output
 }
 
-@test "Should activate legacy_ssl" {
-  run bash -c "sudo docker-compose logs $batsContainerName | grep -E \"Activated service 'legacy_ssl' on (\[::\]:5223|\[\*\]:5223), (\[::\]:5223|\[\*\]:5223)\""
+@test "Should activate c2s_direct_tls" {
+  run bash -c "sudo docker-compose logs $batsContainerName | grep -E \"Activated service 'c2s_direct_tls' on (\[::\]:5223|\[\*\]:5223), (\[::\]:5223|\[\*\]:5223)\""
   assert_success
   assert_output
 }
@@ -85,4 +85,9 @@ load 'bats/bats-assert/load'
   run bash -c "sudo docker-compose logs $batsContainerName | grep \"Serving 'file_share' at https:\/\/upload.example.com:5281\/file_share\""
   assert_success
   assert_output
+}
+
+@test "Should not use deprecated config" {
+  run bash -c "sudo docker-compose exec $batsContainerName /bin/bash -c \"/entrypoint.bash check\" | grep 'deprecated' -A 3"
+  assert_failure
 }

@@ -6,11 +6,11 @@ local domain_pubsub = os.getenv("DOMAIN_PUBSUB")
 
 -- XEP-0368: SRV records for XMPP over TLS
 -- https://compliance.conversations.im/test/xep0368/
-legacy_ssl_ssl = {
+c2s_direct_tls_ssl = {
 	certificate = "certs/" .. domain .. "/fullchain.pem";
 	key = "certs/" .. domain .. "/privkey.pem";
 }
-legacy_ssl_ports = { 5223 }
+c2s_direct_tls_ports = { 5223 }
 
 -- https://prosody.im/doc/certificates#service_certificates
 -- https://prosody.im/doc/ports#ssl_configuration
