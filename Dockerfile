@@ -99,13 +99,9 @@ COPY *.bash /usr/local/bin/
 
 RUN download-prosody-modules.bash \
  && docker-prosody-module-install.bash \
-        bookmarks `# XEP-0411: Bookmarks Conversion` \
-        carbons `# message carbons (XEP-0280)` \
         cloud_notify `# XEP-0357: Push Notifications` \
-        csi `# client state indication (XEP-0352)` \
         e2e_policy `# require end-2-end encryption` \
         filter_chatstates `# disable "X is typing" type messages` \
-        smacks `# stream management (XEP-0198)` \
         throttle_presence `# presence throttling in CSI` \
         vcard_muc `# XEP-0153: vCard-Based Avatar (MUC)` \
  && rm -rf "/usr/src/prosody-modules"
