@@ -91,3 +91,8 @@ load 'bats/bats-assert/load'
   run bash -c "sudo docker-compose exec $batsContainerName /bin/bash -c \"/entrypoint.bash check\" | grep 'deprecated' -A 3"
   assert_failure
 }
+
+@test "Should not have warnings in log" {
+  run bash -c "sudo docker-compose logs $batsContainerName | grep -E \"warn\""
+  assert_failure
+}
