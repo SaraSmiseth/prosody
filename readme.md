@@ -167,9 +167,9 @@ services:
       - ./data:/usr/local/var/lib/prosody
 ```
 
-Boot it via: ```docker-compose up -d```.
+Boot it via: ```docker compose up -d```.
 
-Inspect logs: ```docker-compose logs -f```.
+Inspect logs: ```docker compose logs -f```.
 
 ### Volumes permissions
 
@@ -265,7 +265,7 @@ If you need additional configuration just overwrite the respective _cfg.lua_ fil
 When migrating from prosody 0.10, you need to update the database once:
 
 ```bash
-docker-compose exec server bash
+docker compose exec server bash
 prosodyctl mod_storage_sql upgrade
 ```
 
