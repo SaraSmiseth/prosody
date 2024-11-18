@@ -19,7 +19,7 @@ registerTestUser() {
     local userName="$1"
     local containerName="$2"
     echo "Registering TestUser '$userName' in container '$containerName'"
-    sudo docker compose exec "$containerName" /bin/bash -c "/entrypoint.bash register $userName example.com 12345678"
+    sudo docker compose exec "$containerName" /bin/bash -c "prosodyctl register $userName example.com 12345678"
 }
 
 registerTestUsers() {
