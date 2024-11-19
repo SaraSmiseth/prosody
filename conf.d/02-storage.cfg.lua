@@ -1,8 +1,8 @@
 default_storage = "sql"
 
 sql = {
-  driver = os.getenv("DB_DRIVER");
-  database = os.getenv("DB_DATABASE");
+  driver = os.getenv("DB_DRIVER") or "SQLite3";
+  database = os.getenv("DB_DATABASE") or "prosody.sqlite";
   host = os.getenv("DB_HOST");
   port = os.getenv("DB_PORT");
   username = os.getenv("DB_USERNAME");

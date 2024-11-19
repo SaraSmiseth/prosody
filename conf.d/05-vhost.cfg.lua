@@ -1,8 +1,8 @@
 local domain = os.getenv("DOMAIN")
-local domain_http_upload = os.getenv("DOMAIN_HTTP_UPLOAD")
-local domain_muc = os.getenv("DOMAIN_MUC")
-local domain_proxy = os.getenv("DOMAIN_PROXY")
-local domain_pubsub = os.getenv("DOMAIN_PUBSUB")
+local domain_http_upload = os.getenv("DOMAIN_HTTP_UPLOAD") or "upload." .. domain
+local domain_muc = os.getenv("DOMAIN_MUC") or "conference." .. domain
+local domain_proxy = os.getenv("DOMAIN_PROXY") or "proxy." .. domain
+local domain_pubsub = os.getenv("DOMAIN_PUBSUB") or "pubsub." .. domain
 
 -- XEP-0368: SRV records for XMPP over TLS
 -- https://compliance.conversations.im/test/xep0368/

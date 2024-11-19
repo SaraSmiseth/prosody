@@ -3,15 +3,16 @@
 
 local stringy = require "stringy" 
 
-admins = stringy.split(os.getenv("PROSODY_ADMINS"), ", ");
+local prosody_admins = os.getenv("PROSODY_ADMINS") or "";
+admins = stringy.split(prosody_admins, ", ");
 
 pidfile = "/var/run/prosody/prosody.pid"
 
-allow_registration = os.getenv("ALLOW_REGISTRATION");
+allow_registration = os.getenv("ALLOW_REGISTRATION") or "true";
 
-c2s_require_encryption = os.getenv("C2S_REQUIRE_ENCRYPTION");
-s2s_require_encryption = os.getenv("S2S_REQUIRE_ENCRYPTION");
-s2s_secure_auth = os.getenv("S2S_SECURE_AUTH");
+c2s_require_encryption = os.getenv("C2S_REQUIRE_ENCRYPTION") or "true";
+s2s_require_encryption = os.getenv("S2S_REQUIRE_ENCRYPTION") or "true";
+s2s_secure_auth = os.getenv("S2S_SECURE_AUTH") or "true";
 
 authentication = os.getenv("AUTHENTICATION") or "internal_hashed";
 
@@ -26,7 +27,7 @@ ldap_mode = os.getenv("LDAP_MODE") or "bind";
 ldap_admin_filter = os.getenv("LDAP_ADMIN_FILTER") or "";
 
 log = {
-    {levels = {min = os.getenv("LOG_LEVEL")}, to = "console"};
+    {levels = {min = os.getenv("LOG_LEVEL") or "info"}, to = "console"};
 };
 
 Include "conf.d/*.cfg.lua";

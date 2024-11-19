@@ -19,7 +19,7 @@ registerTestUser() {
     local userName="$1"
     local containerName="$2"
     echo "Registering TestUser '$userName' in container '$containerName'"
-    sudo docker compose exec "$containerName" /bin/bash -c "/entrypoint.bash register $userName example.com 12345678"
+    sudo docker compose exec "$containerName" /bin/bash -c "prosodyctl register $userName example.com 12345678"
 }
 
 registerTestUsers() {
@@ -42,7 +42,7 @@ runTests() {
     && pytest \
     && deactivate \
     && sleep 5 \
-    && sudo docker-compose logs "$containerName" \
+    && sudo docker compose logs "$containerName" \
     && export batsContainerName="$containerName" \
     && ./bats/bats-core/bin/bats tests.bats \
     && ./bats/bats-core/bin/bats tests-"$containerName".bats
@@ -56,22 +56,22 @@ generateCert "upload.example.com"
 
 # Run tests for first container with postgres
 # Start postgres first and wait for 10 seconds before starting prosody.
-sudo docker-compose down
-sudo docker-compose up -d postgres
+sudo docker compose down
+sudo docker compose up -d postgres
 sleep 10
-sudo docker-compose up -d prosody_postgres
+sudo docker compose up -d prosody_postgres
 
 registerTestUsers prosody_postgres
 runTests prosody_postgres
-sudo docker-compose down
+sudo docker compose down
 
 # Run tests for second container with SQLite
-sudo docker-compose up -d prosody
+sudo docker compose up -d prosody
 registerTestUsers prosody
 runTests prosody
-sudo docker-compose down
+sudo docker compose down
 
 # Run tests for prosody with ldap
-sudo docker-compose up -d prosody_ldap
+sudo docker compose up -d prosody_ldap
 runTests prosody_ldap
-sudo docker-compose down
+sudo docker compose down
