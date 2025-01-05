@@ -5,10 +5,10 @@ ARG VCS_REF
 ARG VERSION
 
 ARG LUAROCKS_VERSION=3.11.1
-ARG PROSODY_VERSION=0.12.4
+ARG PROSODY_VERSION=0.12.5
 
 ARG LUAROCKS_SHA256="c3fb3d960dffb2b2fe9de7e3cb004dc4d0b34bb3d342578af84f84325c669102"
-ARG PROSODY_DOWNLOAD_SHA256="47d712273c2f29558c412f6cdaec073260bbc26b7dda243db580330183d65856"
+ARG PROSODY_DOWNLOAD_SHA256="778fb7707a0f10399595ba7ab9c66dd2a2288c0ae3a7fe4ab78f97d462bd399f"
 
 LABEL luarocks.version="${LUAROCKS_VERSION}"
 LABEL org.opencontainers.image.authors="Sara Smiseth"
@@ -87,7 +87,7 @@ RUN mkdir -p /var/run/prosody/ \
  && chown prosody:prosody /var/run/prosody/
 
 # https://github.com/prosody/prosody-docker/issues/25
-ENV __FLUSH_LOG yes
+ENV __FLUSH_LOG=yes
 
 VOLUME ["/usr/local/var/lib/prosody"]
 
