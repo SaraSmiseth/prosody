@@ -34,13 +34,9 @@ runTests() {
     local containerName="$1"
     python --version \
     && python3 --version \
-    && python3 -m venv venv \
-    && source venv/bin/activate \
-    && python --version \
-    && pip --version \
-    && pip install -r requirements.txt \
-    && pytest \
-    && deactivate \
+    && uv venv \
+    && uv run python --version \
+    && uv run pytest \
     && sleep 5 \
     && sudo docker compose logs "$containerName" \
     && export batsContainerName="$containerName" \

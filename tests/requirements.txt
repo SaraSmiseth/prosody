@@ -1,4 +1,0 @@
-aioxmpp==0.13.3
-pip-chill==1.0.3
-pytest-asyncio==0.21.0
-pytz==2023.3
