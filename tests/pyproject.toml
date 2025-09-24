@@ -1,0 +1,14 @@
+[project]
+name = "tests"
+version = "0.1.0"
+description = "Project to run tests"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "aioxmpp>=0.13.3",
+    "pytest-asyncio>=1.2.0",
+    "pytz>=2025.2",
+]

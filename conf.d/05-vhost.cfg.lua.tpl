@@ -1,8 +1,8 @@
-local domain = os.getenv("DOMAIN")
-local domain_http_upload = os.getenv("DOMAIN_HTTP_UPLOAD") or "upload." .. domain
-local domain_muc = os.getenv("DOMAIN_MUC") or "conference." .. domain
-local domain_proxy = os.getenv("DOMAIN_PROXY") or "proxy." .. domain
-local domain_pubsub = os.getenv("DOMAIN_PUBSUB") or "pubsub." .. domain
+local domain = "{{ .DOMAIN }}"
+local domain_http_upload = {{ if .DOMAIN_HTTP_UPLOAD }}"{{ .DOMAIN_HTTP_UPLOAD }}"{{ else }}"upload." .. domain{{ end }}
+local domain_muc = {{ if .DOMAIN_MUC }}"{{ .DOMAIN_MUC }}"{{ else }}"conference." .. domain{{ end }}
+local domain_proxy = {{ if .DOMAIN_PROXY }}"{{ .DOMAIN_PROXY }}"{{ else }}"proxy." .. domain{{ end }}
+local domain_pubsub = {{ if .DOMAIN_PUBSUB }}"{{ .DOMAIN_PUBSUB }}"{{ else }}"pubsub." .. domain{{ end }}
 
 -- XEP-0368: SRV records for XMPP over TLS
 -- https://compliance.conversations.im/test/xep0368/
@@ -26,10 +26,10 @@ disco_items = {
 
 -- Set up a http file upload because proxy65 is not working in muc
 Component (domain_http_upload) "http_file_share"
-	http_file_share_expires_after = 60 * 60 * 24 * 7 -- a week in seconds
-	local size_limit = os.getenv("HTTP_FILE_SHARE_SIZE_LIMIT") or 10 * 1024 * 1024 -- Default is 10MB
-	http_file_share_size_limit = size_limit
-	http_file_share_daily_quota = os.getenv("HTTP_FILE_SHARE_DAILY_QUOTA") or 10 * size_limit -- Default is 10x the size limit
+  http_file_share_expires_after = {{ if .HTTP_FILE_SHARE_EXPIRES_AFTER }}{{ .HTTP_FILE_SHARE_EXPIRES_AFTER }}{{ else }}60 * 60 * 24 * 7{{ end }}
+  local size_limit = {{ if .HTTP_FILE_SHARE_SIZE_LIMIT }}{{ .HTTP_FILE_SHARE_SIZE_LIMIT }}{{ else }}10 * 1024 * 1024{{ end }}
+  http_file_share_size_limit = size_limit
+  http_file_share_daily_quota = {{ if .HTTP_FILE_SHARE_DAILY_QUOTA }}{{ .HTTP_FILE_SHARE_DAILY_QUOTA }}{{ else }}10 * size_limit{{ end }}
 
 Component (domain_muc) "muc"
 	name = "Prosody Chatrooms"
